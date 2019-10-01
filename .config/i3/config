@@ -131,7 +131,13 @@ bindsym $mod+Shift+less move container to output left
 # toggle tiling / floating
 bindsym $mod+Shift+f floating toggle
 
+# 2 fullscreen, no Windows 10 taskbar
 # fake-outputs 2560x1440+0+0,2560x1440+2560+0
+
+# 2 fullsrceen with 40px for the Windows 10 taskbar
+fake-outputs 2560x1400+0+0,2560x1400+2560+0
+
+bindsym $mod+Shift+e exit
 
 bar {
     status_command i3status

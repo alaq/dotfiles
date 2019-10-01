@@ -21,7 +21,7 @@
     "workbench.iconTheme": null,
     "workbench.editor.showIcons": false,
     "workbench.statusBar.visible": true,
-    "window.menuBarVisibility": "default",
+    "window.menuBarVisibility": "hidden",
     "eslint.autoFixOnSave": true,
     "vim.useSystemClipboard": true,
     "vim.overrideCopy": true,
