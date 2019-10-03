@@ -51,7 +51,7 @@ bindsym $mod+BackSpace split toggle
 bindsym $mod+f fullscreen toggle
 
 # change gaps interactively
-bindsym $mod+minus gaps inner current minus 6
+# bindsym $mod+minus gaps inner current minus 6
 bindsym $mod+plus gaps inner current plus 6
 
 set $ws1 "1"
@@ -138,6 +138,12 @@ bindsym $mod+Shift+f floating toggle
 fake-outputs 2560x1400+0+0,2560x1400+2560+0
 
 bindsym $mod+Shift+e exit
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
 
 bar {
     status_command i3status

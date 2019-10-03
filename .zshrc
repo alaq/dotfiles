@@ -2,8 +2,6 @@
 # User configuration sourced by interactive shells
 #
 
-export DISPLAY=172.26.16.1:0
-
 # Luke's config for the Zoomer Shell
 
 # Enable colors and change prompt:
