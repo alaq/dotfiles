@@ -151,3 +151,7 @@ bar {
 	mode dock
 	modifier None
 }
+
+# open org-capture as a floating window
+bindsym $mod+n exec --no-startup-id emacsclient -ne "(+org-capture/open-frame-temp)"
+for_window [title="org-capture"] floating enable
