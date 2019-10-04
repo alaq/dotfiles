@@ -1,14 +1,32 @@
 ;;; .doom.d/config.el -*- lexical-binding: t; -*-
 
-;; Place your private configuration here
+;; UI
 
-(setq org-startup-indented t)
-(setq org-startup-with-inline-images t)
+;(setq doom-font (font-spec :family "Fira Code" :size 12)
+;      doom-variable-pitch-font (font-spec :family "Noto Sans" :size 13))
+
+;; Keybindings
+(map!
+      ;; Easier window movement
+      :ni "C-h" #'evil-window-left
+      :ni "C-j" #'evil-window-down
+      :ni "C-k" #'evil-window-up
+      :ni "C-l" #'evil-window-right)
+
+;; org-mode
+(setq org-directory "~/org/"
+      org-ellipsis " ▼ "
+      ;; org-ellipsis " ▾ "
+      org-bullets-bullet-list '("#")
+      org-startup-indented t
+      org-startup-with-inline-images t
+      ;; org-agenda-files (quote ("~/org/tasks.org" "~/org/journal.org"))
+      org-agenda-skip-scheduled-if-done t
+      org-agenda-files (ignore-errors (directory-files +org-dir t "\\.org$" t))
+      +org-capture-todo-file "tasks.org"
+      org-log-done 'time)
 
 (add-hook 'auto-save-hook 'org-save-all-org-buffers)
-(blink-cursor-mode t)
-
-(setq org-agenda-files (quote ("~/org/tasks.org" "~/org/journal.org")))
 
 (after! org
   (add-to-list 'org-capture-templates
@@ -32,9 +50,17 @@
                  "* DONE %?\n %T"
                  :empty-lines 1)))
 
-(setq org-bullets-bullet-list (quote ("◉" "○")))
+;; Other settings
+(projectile-add-known-project "/mnt/c/cats")
+(projectile-add-known-project "~/org")
 
-(setq display-line-numbers-type 'relative)
+(setq
+  blink-cursor-mode t
+  projectile-project-search-path '("~/git/")
+  ;; doom-font (font-spec :family "SF Mono" :size 20)
+  ;; doom-big-font (font-spec :family "SF Mono" :size 36)
+  ;; doom-variable-pitch-font (font-spec :family "Avenir Next" :size 18)
+  display-line-numbers-type 'relative)
 
 
 
