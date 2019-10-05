@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
 # Add ppa
-sudo add-apt-repository ppa:kelleyk/emacs &&
-sudo add-apt-repository ppa:kgilmer/speed-ricer
+sudo add-apt-repository ppa:kelleyk/emacs -y &&
+sudo add-apt-repository ppa:kgilmer/speed-ricer -y &&
 
 sudo apt update &&
 sudo apt upgrade &&
-sudo apt install zsh emacs26 firefox i3-gaps
+sudo apt install git zsh emacs26 firefox i3-gaps -y &&
 
 chsh -s /bin/zsh && # change shell to zsh
 
@@ -14,11 +14,10 @@ chsh -s /bin/zsh && # change shell to zsh
 rm -r ~/.emacs.d &&
 git clone https://github.com/hlissner/doom-emacs -b develop ~/.emacs.d &&
 cd ~/.emacs.d &&
-make quickstart &&
-cd ~ &&
+./.emacs.d/bin/doom refresh &&
 
 # vscode
-# TODO Add installation step for vscode
+sudo snap install --classic code
 if command -v code >/dev/null; then
     # from `code --list-extensions`
     modules="
