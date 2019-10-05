@@ -33,10 +33,10 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+bindsym $mod+h exec ~/.local/bin/i3-navigate-emacs left
+bindsym $mod+j exec ~/.local/bin/i3-navigate-emacs down
+bindsym $mod+k exec ~/.local/bin/i3-navigate-emacs up
+bindsym $mod+l exec ~/.local/bin/i3-navigate-emacs right
 
 # resize
 bindsym $mod+y exec --no-startup-id ~/.local/bin/i3resize left

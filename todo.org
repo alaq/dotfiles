@@ -1,3 +1,6 @@
 #+TITLE: todo
-* TODO Add i3/emacs navigation
+* DONE Add i3/emacs navigation
+CLOSED: [2019-10-05 Sat 13:34]
 https://bl.ocks.org/mijoharas/b9d09daed9654ca8d0d081015209ecd0
+** DONE Installed jq
+CLOSED: [2019-10-05 Sat 13:25]
