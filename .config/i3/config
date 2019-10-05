@@ -20,7 +20,7 @@ font pango:monospace 12
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec hyper
+bindsym $mod+Return exec rxvt-unicode
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -39,10 +39,10 @@ bindsym $mod+k focus up
 bindsym $mod+l focus right
 
 # resize
-bindsym $mod+y		exec --no-startup-id ~/.local/bin/i3resize left
-bindsym $mod+u		exec --no-startup-id ~/.local/bin/i3resize down
-bindsym $mod+i		exec --no-startup-id ~/.local/bin/i3resize up
-bindsym $mod+o		exec --no-startup-id ~/.local/bin/i3resize right
+bindsym $mod+y exec --no-startup-id ~/.local/bin/i3resize left
+bindsym $mod+u exec --no-startup-id ~/.local/bin/i3resize down
+bindsym $mod+i exec --no-startup-id ~/.local/bin/i3resize up
+bindsym $mod+o exec --no-startup-id ~/.local/bin/i3resize right
 
 # toggle split orientation
 bindsym $mod+BackSpace split toggle
@@ -135,7 +135,7 @@ bindsym $mod+Shift+f floating toggle
 # fake-outputs 2560x1440+0+0,2560x1440+2560+0
 
 # 2 fullsrceen with 40px for the Windows 10 taskbar
-fake-outputs 2560x1400+0+0,2560x1400+2560+0
+# fake-outputs 2560x1400+0+0,2560x1400+2560+0
 
 bindsym $mod+Shift+e exit
 
@@ -147,9 +147,9 @@ bindsym $mod+minus scratchpad show
 
 bar {
     status_command i3status
-	position top
-	mode dock
-	modifier None
+    position top
+    mode dock
+    modifier None
 }
 
 # open org-capture as a floating window
