@@ -96,7 +96,7 @@ urxvt-stream.letterSpace:      -1
 
 URxvt*.lineSpace:              0
 URxvt*.letterSpace:            -1
-URxvt*.font:                   xft:DejaVu Sans Mono:pixelsize=18
+URxvt*.font:                   xft:DejaVu Sans Mono:pixelsize=16
 urxvt-scratch.font:            xft:DejaVu Sans Mono:pixelsize=16
 urxvt-fuzzy.font:              xft:DejaVu Sans Mono:pixelsize=20
 
