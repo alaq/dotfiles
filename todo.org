@@ -1,4 +1,15 @@
 #+TITLE: todo
+* TODO Customize zsh prompt
+** time
+** git
+** no name
+* TODO Add rofi
+** TODO As a launcher
+** TODO For touch friendly window switcher
+* TODO Add firefox extensions settings to config
+* TODO Hide vscode WSL warning when launching from the command line
+* TODO Larger border for active window in i3
+** This may not be possible
 * DONE Add i3/emacs navigation
 CLOSED: [2019-10-05 Sat 13:34]
 https://bl.ocks.org/mijoharas/b9d09daed9654ca8d0d081015209ecd0

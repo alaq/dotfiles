@@ -145,6 +145,9 @@ bindsym $mod+Shift+minus move scratchpad
 # Show the first scratchpad window
 bindsym $mod+minus scratchpad show
 
+# Change mode
+bindsym $mod+m layout toggle all
+
 bar {
     status_command i3status
     position top

@@ -6,7 +6,16 @@ sudo add-apt-repository ppa:kgilmer/speed-ricer -y &&
 
 sudo apt update &&
 sudo apt upgrade &&
-sudo apt install git zsh emacs26 firefox i3-gaps -y &&
+sudo apt install git zsh emacs26 firefox i3-gaps polybar fonts-font-awesome -y &&
+
+is_wsl=$(cat /proc/version | grep "microsoft" | wc -l)
+if [ ! $is_wsl -eq 1 ]
+then
+    echo "Not using WSL, installing i3-gnome."
+    git clone https://github.com/i3-gnome/i3-gnome.git &&
+    cd i3-gnome &&
+    sudo make install
+fi
 
 chsh -s /bin/zsh && # change shell to zsh
 

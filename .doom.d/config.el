@@ -24,6 +24,7 @@
       org-agenda-skip-scheduled-if-done t
       org-agenda-files (ignore-errors (directory-files +org-dir t "\\.org$" t))
       +org-capture-todo-file "tasks.org"
+      org-use-property-inheritance t
       org-log-done 'time)
 
 (add-hook 'auto-save-hook 'org-save-all-org-buffers)
