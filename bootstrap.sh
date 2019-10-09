@@ -13,7 +13,7 @@ if [ ! $is_wsl -eq 1 ]
 then
     echo "Not using WSL, installing i3-gnome."
     sudo apt install gnome-flashback -y >/dev/null 2>&1 &&
-    git clone https://github.com/i3-gnome/i3-gnome.git || git -C i3-gnome pull >/dev/null 2>&1 &&
+    git clone https://github.com/i3-gnome/i3-gnome.git 2> /dev/null || git -C i3-gnome pull >/dev/null 2>&1 &&
     cd i3-gnome >/dev/null 2>&1 &&
     sudo make install >/dev/null 2>&1
 fi
@@ -40,7 +40,7 @@ vscodevim.vim
     done
 fi
 
-git clone --bare https://github.com/alaq/dotfiles.git $HOME/.dotfiles || git -C ~/.dotfiles pull >/dev/null 2>&1
+git clone --bare https://github.com/alaq/dotfiles.git $HOME/.dotfiles 2> /dev/null || git -C ~/.dotfiles pull >/dev/null 2>&1
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 config checkout
 config config --local status.showUntrackedFiles no
