@@ -43,3 +43,4 @@ fi
 git clone --bare https://github.com/alaq/dotfiles.git $HOME/.dotfiles || git -C ~/.dotfiles pull >/dev/null 2>&1
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 config checkout
+config config --local status.showUntrackedFiles no
