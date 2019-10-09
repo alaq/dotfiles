@@ -23,7 +23,7 @@ chsh -s /bin/zsh && # change shell to zsh
 rm -r ~/.emacs.d &&
 git clone https://github.com/hlissner/doom-emacs -b develop ~/.emacs.d &&
 cd ~/.emacs.d &&
-./.emacs.d/bin/doom refresh &&
+./bin/doom refresh &&
 
 # vscode
 sudo snap install --classic code
