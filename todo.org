@@ -1,4 +1,12 @@
 #+TITLE: todo
+* TODO Remap Tab, or caps lock to modifier
+This should work, but for some reason doesn't
+exec --no-startup-id xmodmap -e 'keycode 23 = Alt_L' && xset -r 23
+
+xmodmap -e 'keycode 23 = Alt_L'
+works in the terminal
+* TODO Remap Ctrl Escape to Caps Lock
+* TODO Remap Caps Lock to Escape
 * TODO Customize zsh prompt
 ** time
 ** git
