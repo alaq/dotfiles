@@ -14,7 +14,7 @@ bold "Updating Ubuntu's packages"
 sudo apt update
 sudo apt upgrade -y
 bold "Installing software"
-sudo apt install git zsh emacs26 rxvt-unicode i3-wm dmenu i3status fonts-font-awesome arc-theme -y
+sudo apt install git zsh emacs26 rxvt-unicode i3-wm dmenu i3status rofi fonts-font-awesome arc-theme -y
 # i3-gaps polybar
 
 is_wsl=$(cat /proc/version | grep "microsoft" | wc -l)

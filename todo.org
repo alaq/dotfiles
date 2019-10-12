@@ -1,23 +1,19 @@
 #+TITLE: todo
-* TODO Remap Tab, or caps lock to modifier
-This should work, but for some reason doesn't
-exec --no-startup-id xmodmap -e 'keycode 23 = Alt_L' && xset -r 23
-
-xmodmap -e 'keycode 23 = Alt_L'
-works in the terminal
+* TODO Add search with rofi
+** bindsym --release $mod+x exec --no-startup-id rofi -lines 10 -padding 0 -show search -modi search:~/bin/rofi-web-search.py -i -p "Search: "
+** script lives here: https://github.com/pdonadeo/rofi-web-search
 * TODO Remap Ctrl Escape to Caps Lock
 * TODO Remap Caps Lock to Escape
 * TODO Customize zsh prompt
 ** time
 ** git
 ** no name
-* TODO Add rofi
+* TODO Hide vscode WSL warning when launching from the command line
+* DONE Add rofi
 ** TODO As a launcher
 ** TODO For touch friendly window switcher
-* TODO Add firefox extensions settings to config
-* TODO Hide vscode WSL warning when launching from the command line
-* TODO Larger border for active window in i3
-** This may not be possible
+* DONE Add firefox extensions settings to config
+CLOSED: [2019-10-12 Sat 19:20]
 * DONE Add i3/emacs navigation
 CLOSED: [2019-10-05 Sat 13:34]
 https://bl.ocks.org/mijoharas/b9d09daed9654ca8d0d081015209ecd0
