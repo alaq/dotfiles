@@ -10,7 +10,7 @@ echo "Updating Ubuntu's packages"
 sudo apt update
 sudo apt upgrade -y
 echo "Installing software"
-sudo apt install git zsh emacs26 rxvt-unicode i3-wm dmenu i3status fonts-font-awesome arc-dark -y
+sudo apt install git zsh emacs26 rxvt-unicode i3-wm dmenu i3status fonts-font-awesome arc-theme -y
 # i3-gaps polybar
 
 is_wsl=$(cat /proc/version | grep "microsoft" | wc -l)
@@ -51,6 +51,6 @@ fi
 
 echo "Getting dotfiles"
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-git clone --bare https://github.com/alaq/dotfiles.git $HOME/.dotfiles 2> /dev/null || config pull
-config checkout
-config config --local status.showUntrackedFiles no
+git clone --bare https://github.com/alaq/dotfiles.git $HOME/.dotfiles 2> /dev/null || /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull
+/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout
+/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
