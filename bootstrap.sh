@@ -53,6 +53,9 @@ vscodevim.vim
     done
 fi
 
+bold "Removing files conflicting with dotfiles"
+rm .mozilla/firefox/profiles.ini
+
 bold "Getting dotfiles"
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 git clone --bare https://github.com/alaq/dotfiles.git $HOME/.dotfiles 2> /dev/null || /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull
