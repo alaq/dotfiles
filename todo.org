@@ -1,4 +1,8 @@
 #+TITLE: todo
+* TODO Installation should curl the script from github and run it
+* TODO Save Firefox extension settings
+** vimium disabled keys per website
+* TODO Add search links to combi mode in rofi (windows, drun, web searches)
 * TODO Add search with rofi
 ** bindsym --release $mod+x exec --no-startup-id rofi -lines 10 -padding 0 -show search -modi search:~/bin/rofi-web-search.py -i -p "Search: "
 ** script lives here: https://github.com/pdonadeo/rofi-web-search
@@ -9,6 +13,9 @@
 ** git
 ** no name
 * TODO Hide vscode WSL warning when launching from the command line
+* TODO Centralize colors in .Xresources
+* DONE Fix wrong color on zsh on startup
+CLOSED: [2019-10-13 Sun 18:54]
 * DONE Add rofi
 ** TODO As a launcher
 ** TODO For touch friendly window switcher

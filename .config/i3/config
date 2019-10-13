@@ -160,6 +160,7 @@ exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
 exec_always --no-startup-id gnome-power-manager
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id gnome-flashback
+exec --no-startup-id xrdb -merge .Xresources
 
 # open org-capture as a floating window
 bindsym $mod+n exec --no-startup-id emacsclient -ne "(+org-capture/open-frame-temp)"
