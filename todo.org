@@ -1,5 +1,6 @@
 #+TITLE: todo
 * TODO Installation should curl the script from github and run it
+* TODO Save unlimited (?) history for the zsh prompt
 * TODO Save Firefox extension settings
 ** vimium disabled keys per website
 * TODO Add search links to combi mode in rofi (windows, drun, web searches)
