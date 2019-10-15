@@ -1,5 +1,12 @@
 #+TITLE: todo
 * TODO Installation should curl the script from github and run it
+* TODO i3 Smart window centering
+** get inspired by https://samsaffron.com/archive/2019/04/09/my-i3-window-manager-setup
+** use ~bindsym $mod+c exec "/home/sam/.i3/i3-plus smart_center 1830x2100,2030x2100,2230x2100"~
+** the i3-plus utility lives here https://github.com/SamSaffron/dotfiles/blob/master/i3/i3-plus
+** this command works from the command line: ~i3-msg floating enable; i3-msg resize set width 1280 px; i3-msg resize set height 1300 px; i3-msg move position center; i3-msg move up 5 px~
+* TODO Potentially having a stack mode for terminals
+** also look into https://samsaffron.com/archive/2019/04/09/my-i3-window-manager-setup
 * TODO Save unlimited (?) history for the zsh prompt
 * TODO Save Firefox extension settings
 ** vimium disabled keys per website
@@ -15,6 +22,8 @@
 ** no name
 * TODO Hide vscode WSL warning when launching from the command line
 * TODO Centralize colors in .Xresources
+* TODO Resizing floating windows in i3 should have larger steps
+* TODO Add aliases to eshell
 * DONE Fix wrong color on zsh on startup
 CLOSED: [2019-10-13 Sun 18:54]
 * DONE Add rofi
