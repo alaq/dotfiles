@@ -15,7 +15,7 @@ rclone sync dropbox:org $HOME/.org-staging
     echo "Creating the ~/org folder" &&
     /usr/bin/git clone $HOME/.git-org/ $HOME/org
 git -C $HOME/org commit -am "$NOW"
-git -C $HOME/org pull
+git -C $HOME/org pull --no-edit
 git -C $HOME/org push
 /usr/bin/git --git-dir=$HOME/.git-org/ --work-tree=$HOME/.org-staging checkout -f
 rclone sync $HOME/.org-staging dropbox:org
