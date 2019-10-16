@@ -21,9 +21,13 @@
 ** git
 ** no name
 * TODO Hide vscode WSL warning when launching from the command line
+** this is done with ~code . <<< "y"~
 * TODO Centralize colors in .Xresources
 * TODO Resizing floating windows in i3 should have larger steps
 * TODO Add aliases to eshell
+* DONE Add larger borders to i3 windows
+CLOSED: [2019-10-16 Wed 14:19]
+** this will make it easier to know which window is active
 * DONE Fix wrong color on zsh on startup
 CLOSED: [2019-10-13 Sun 18:54]
 * DONE Add rofi
