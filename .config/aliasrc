@@ -2,4 +2,15 @@
 
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias gs='git status'
-alias ls='ls -la'
+alias gcm='git checkout master'
+alias gd='git diff'
+alias GD='git diff HEAD~1 HEAD'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+alias ls='ls -la --color=auto'
+alias x="exit"
+alias q="exit"
+alias open='xdg-open'

@@ -6,6 +6,7 @@
 ** this command works from the command line: ~i3-msg floating enable; i3-msg resize set width 1280 px; i3-msg resize set height 1300 px; i3-msg move position center; i3-msg move up 5 px~
 * TODO Potentially having a stack mode for terminals
 ** also look into https://samsaffron.com/archive/2019/04/09/my-i3-window-manager-setup
+* TODO Copy mozillarbs to dotfiles repo
 * TODO Save Firefox extension settings
 ** vimium disabled keys per website
 * TODO Add search links to combi mode in rofi (windows, drun, web searches)
