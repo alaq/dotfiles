@@ -7,6 +7,7 @@
 * TODO Potentially having a stack mode for terminals
 ** also look into https://samsaffron.com/archive/2019/04/09/my-i3-window-manager-setup
 * TODO Copy mozillarbs to dotfiles repo
+* TODO Install i3-gaps with rounded corners
 * TODO Save Firefox extension settings
 ** vimium disabled keys per website
 * TODO Add search links to combi mode in rofi (windows, drun, web searches)
@@ -20,6 +21,8 @@
 * TODO Resizing floating windows in i3 should have larger steps
 * TODO Add aliases to eshell
 * TODO Add emoji support to emacs
+* TODO Run mn script from emacs
+* TODO merge note script should skip ics files
 * DONE Customize zsh prompt
 CLOSED: [2019-10-16 Wed 00:57]
 ** time
