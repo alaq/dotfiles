@@ -76,5 +76,8 @@ _comp_options+=(globdots)		# Include hidden files.
 # Load local configuration
 [ -f "$HOME/.config/localrc" ] && source "$HOME/.config/localrc"
 
+# Add scripts to path
+export PATH=$HOME/.local/bin:$PATH
+
 # Load zsh-syntax-highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
