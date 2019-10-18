@@ -16,7 +16,8 @@
 #define bcyn #a3685a
 #define wht  #c5c8c6
 #define bwht #ffffff
-#define bg blk
+#define bg #21242b
+! #define bg blk
 #define fg wht
 
 *.foreground:  fg
@@ -69,7 +70,8 @@ Emacs.menuBar: 0
 Emacs.verticalScrollBars: off
 
 ! urxvt
-URxvt*.background:             [96]blk
+! URxvt*.background:             [96]blk
+URxvt*.background:             bg
 URxvt*.termName:               xterm-256color
 URxvt*.geometry:               81x20
 URxvt*.buffered:               true
