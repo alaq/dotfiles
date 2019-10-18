@@ -1,4 +1,7 @@
 #+TITLE: todo
+* TODO Find solution for conflict between org mode and i3 for M-j/k
+* TODO unify the background color of the i3 bar, emacs and the terminal
+* TODO prevent spaces from being added when CTRL ENTER, in org mode
 * TODO i3 Smart window centering
 ** get inspired by https://samsaffron.com/archive/2019/04/09/my-i3-window-manager-setup
 ** use ~bindsym $mod+c exec "/home/sam/.i3/i3-plus smart_center 1830x2100,2030x2100,2230x2100"~

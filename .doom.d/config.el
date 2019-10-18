@@ -30,6 +30,9 @@
 (add-hook 'auto-save-hook 'org-save-all-org-buffers)
 
 (after! org
+  (map! :map org-mode-map
+        :n "M-j" #'org-metadown
+        :n "M-k" #'org-metaup)
   (add-to-list 'org-capture-templates
                '("td" "Todo" entry
                  (file+headline "~/org/tasks.org")

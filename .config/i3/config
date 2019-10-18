@@ -119,6 +119,7 @@ popup_during_fullscreen smart
 new_window pixel 1
 new_float pixel 1
 
+# Add larger border to windows
 for_window [class=".*"] border pixel 3
 
 # Move windows
