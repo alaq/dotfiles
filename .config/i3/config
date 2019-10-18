@@ -157,6 +157,9 @@ bar {
     position top
     mode dock
     modifier None
+    colors {
+           background #21242b
+    }
 }
 
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
