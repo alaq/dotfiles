@@ -16,7 +16,7 @@
 #define bcyn #a3685a
 #define wht  #c5c8c6
 #define bwht #ffffff
-#define bg #21242b
+#define bg #282c34
 ! #define bg blk
 #define fg wht
 

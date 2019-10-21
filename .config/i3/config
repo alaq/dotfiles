@@ -112,6 +112,9 @@ bindsym $mod+Shift+r restart
 # Only enable gaps on a workspace when there is at least one container
 # smart_gaps on
 
+# hide border when there is only one container
+hide_edge_borders smart
+
 # Enable popup during fullscreen
 popup_during_fullscreen smart
 
@@ -157,6 +160,9 @@ bar {
     position top
     mode dock
     modifier None
+    colors {
+        background #282c34
+    }
 }
 
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
