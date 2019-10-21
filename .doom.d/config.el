@@ -33,6 +33,12 @@
   (map! :map org-mode-map
         :n "M-j" #'org-metadown
         :n "M-k" #'org-metaup)
+  (setq org-agenda-custom-commands
+        '(("A" "Agenda and all TODOs"
+           ((agenda #1="")
+            (todo "TODO"))
+           ((org-agenda-start-with-log-mode '(closed clock state))
+            (org-agenda-archives-mode t)))))
   (add-to-list 'org-capture-templates
                '("td" "Todo" entry
                  (file+headline "~/org/tasks.org")
