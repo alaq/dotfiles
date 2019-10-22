@@ -28,6 +28,8 @@
       org-log-done 'time)
 
 (add-hook 'auto-save-hook 'org-save-all-org-buffers)
+;; (remove-hook! 'org-mode-hook #'display-line-numbers-mode)
+(add-hook 'org-mode-hook #'display-line-numbers-mode)
 
 (after! org
   (map! :map org-mode-map

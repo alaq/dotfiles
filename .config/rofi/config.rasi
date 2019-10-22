@@ -4,7 +4,7 @@ configuration {
 
 * {
   background-color: #FFFFFF00;
-  text-color: #fbf1c7;
+  text-color: #bbc2cf;
 }
 
 #window {
@@ -19,7 +19,6 @@ configuration {
   border: 0px;
   padding: 20px;
   background-color: #21242b;
-  /* border-color: #fbf1c7; */
   children: [inputbar, listview];
 }
 
@@ -38,6 +37,8 @@ configuration {
 }
 
 #element selected {
-  background-color: #3f444a;
+  /* background-color: #3f444a; */
+  background-color: #282c34;
   border-radius: 5px;
 }
+
