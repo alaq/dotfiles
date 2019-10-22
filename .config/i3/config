@@ -112,6 +112,9 @@ bindsym $mod+Shift+r restart
 # Only enable gaps on a workspace when there is at least one container
 # smart_gaps on
 
+# hide border when there is only one container
+hide_edge_borders smart
+
 # Enable popup during fullscreen
 popup_during_fullscreen smart
 
@@ -158,7 +161,7 @@ bar {
     mode dock
     modifier None
     colors {
-           background #21242b
+        background #282c34
     }
 }
 
@@ -167,6 +170,7 @@ exec_always --no-startup-id gnome-power-manager
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id gnome-flashback
 exec --no-startup-id xrdb -merge .Xresources
+exec --no-startup-id xsetroot -solid "#282c34"
 
 # open org-capture as a floating window
 bindsym $mod+n exec --no-startup-id emacsclient -ne "(+org-capture/open-frame-temp)"
