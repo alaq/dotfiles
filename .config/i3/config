@@ -175,3 +175,9 @@ exec --no-startup-id xsetroot -solid "#282c34"
 # open org-capture as a floating window
 bindsym $mod+n exec --no-startup-id emacsclient -ne "(+org-capture/open-frame-temp)"
 for_window [title="org-capture"] floating enable
+
+# colors [onedark] from https://github.com/khughitt/dotfiles/blob/master/i3/config#L69-L72
+# class                   border  backgr. text    indic.   child_border
+client.focused          #a067abff #61afefff #23292dff #56b6c2ff #a067abff
+client.focused_inactive          #282c34 #282c34 #616668 #23292d #282c34
+client.unfocused        #282c34 #282c34 #616668 #23292d #282c34
