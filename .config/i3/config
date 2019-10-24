@@ -163,6 +163,10 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 
+# Simulate arrow keys with Control j/k
+# bindsym --release Control+j exec --no-startup-id xdotool key --clearmodifiers Down
+# bindsym --release Control+k exec --no-startup-id xdotool key --clearmodifiers Up
+
 bar {
     status_command i3status
     position top
@@ -179,9 +183,10 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id gnome-flashback
 exec --no-startup-id xrdb -merge .Xresources
 exec --no-startup-id xsetroot -solid "#282c34"
+exec --no-startup-id "compton -b"
 
 # open org-capture as a floating window
-bindsym $mod+n exec --no-startup-id emacsclient -ne "(+org-capture/open-frame-temp)"
+bindsym $mod+n exec --no-startup-id emacsclient -ne '(+org-capture/open-frame t "j")'
 for_window [title="org-capture"] floating enable
 
 # colors [onedark] from https://github.com/khughitt/dotfiles/blob/master/i3/config#L69-L72

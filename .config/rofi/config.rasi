@@ -11,12 +11,11 @@ configuration {
   width: 40%;
   height: 40%;
   border: 0;
-  border-radius: 0px;
+  border-radius: 10px;
   transparency: "real";
 }
 
 #mainbox {
-  border: 0px;
   padding: 20px;
   background-color: #21242b;
   children: [inputbar, listview];
