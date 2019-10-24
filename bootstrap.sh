@@ -33,7 +33,11 @@ gsettings set org.gnome.desktop.interface gtk-theme "Arc Dark"
 bold "Changing default shell to zsh"
 sudo chsh -s /bin/zsh # change shell to zsh
 
-bold "Creating the zsh history file"
+if [ ! -d $HOME/.cache/zsh ]; then
+    bold "Creating the zsh history file"
+    mkdir $HOME/.cache/zsh
+    touch $HOME/.cache/zsh/history
+fi
 
 # emacs
 bold "Installing/updating doom-emacs"
