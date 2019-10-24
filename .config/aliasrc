@@ -11,6 +11,7 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 alias ls='ls -la --color=auto'
-alias x="exit"
+alias e="exit"
 alias q="exit"
+alias c="clear"
 alias open='xdg-open'
