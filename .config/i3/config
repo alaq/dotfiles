@@ -156,8 +156,8 @@ bindsym $mod+minus scratchpad show
 bindsym $mod+m layout toggle all
 
 # Simulate arrow keys with Control j/k
-bindsym --release Control+j exec --no-startup-id xdotool key --clearmodifiers Down
-bindsym --release Control+k exec --no-startup-id xdotool key --clearmodifiers Up
+# bindsym --release Control+j exec --no-startup-id xdotool key --clearmodifiers Down
+# bindsym --release Control+k exec --no-startup-id xdotool key --clearmodifiers Up
 
 bar {
     status_command i3status

@@ -14,7 +14,7 @@ bold "Updating Ubuntu's packages"
 sudo apt update
 sudo apt upgrade -y
 bold "Installing software"
-sudo apt install git jq zsh emacs26 rxvt-unicode i3-wm dmenu i3status rofi fonts-font-awesome arc-theme rclone -y
+sudo apt install git jq zsh emacs26 rxvt-unicode i3-wm dmenu i3status rofi fonts-font-awesome arc-theme rclone compton -y
 # i3-gaps polybar
 
 is_wsl=$(cat /proc/version | grep "microsoft" | wc -l)
@@ -24,11 +24,16 @@ then
     sudo apt install gnome-flashback -y
     git clone https://github.com/i3-gnome/i3-gnome.git 2> /dev/null || git -C i3-gnome pull
     cd i3-gnome
-   sudo make install
+    sudo make install
 fi
+
+bold "Setting the GTK theme"
+gsettings set org.gnome.desktop.interface gtk-theme "Arc Dark"
 
 bold "Changing default shell to zsh"
 sudo chsh -s /bin/zsh # change shell to zsh
+
+bold "Creating the zsh history file"
 
 # emacs
 bold "Installing/updating doom-emacs"
