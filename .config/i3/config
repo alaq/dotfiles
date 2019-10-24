@@ -45,11 +45,20 @@ bindsym $mod+u exec --no-startup-id ~/.local/bin/i3resize down
 bindsym $mod+i exec --no-startup-id ~/.local/bin/i3resize up
 bindsym $mod+o exec --no-startup-id ~/.local/bin/i3resize right
 
+# split in horizontal orientation
+bindsym $mod+g split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
 # toggle split orientation
 bindsym $mod+BackSpace split toggle
+bindsym $mod+s layout toggle split
 
-# enter fullscreen mode for the focused container
+# Change mode of container
 bindsym $mod+f fullscreen toggle
+bindsym $mod+m layout toggle all
+bindsym $mod+t layout tabbed
 
 # change gaps interactively
 # bindsym $mod+minus gaps inner current minus 6
@@ -137,6 +146,7 @@ bindsym $mod+Shift+less move container to output left
 
 # toggle tiling / floating
 bindsym $mod+Shift+f floating toggle
+bindsym $mod+Shift+space floating toggle
 
 # 2 fullscreen, no Windows 10 taskbar
 # fake-outputs 2560x1440+0+0,2560x1440+2560+0
@@ -152,8 +162,6 @@ bindsym $mod+Shift+minus move scratchpad
 # Show the first scratchpad window
 bindsym $mod+minus scratchpad show
 
-# Change mode
-bindsym $mod+m layout toggle all
 
 bar {
     status_command i3status
