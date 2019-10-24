@@ -1,0 +1,25 @@
+* dotfiles
+
+** Features
+- unified appearance accross emacs, vscode, i3, rofi, gtk, firefox
+- i3 with [[https://github.com/i3-gnome/i3-gnome][GNOME session integration]], to manage power, sound, GTK theme, media
+  keys, etc.
+- homogeneous vim keybindings in emacs, vscode, rofi, firefox
+- lightly customized doom emacs
+- vscode
+  - with the following extensions: vscodevim for vim keybindings, gitlens for additional git UI workflows, prettier for JavaScript autoformatting
+  - spacemacs inspired keybindings (such as SPC f f to search for a file)
+
+** Installation
+
+#+BEGIN_SRC sh
+wget -O initial-bootstrap.sh https://raw.githubusercontent.com/alaq/dotfiles/master/bootstrap.sh && sh initial-bootstrap.sh && rm initial-bootstrap.sh
+#+END_SRC
+
+The step above might fail. This is because your $HOME folder might already have some stock configuration files which would be overwritten by Git. The solution is simple: back up the files if you care about them, remove them if you don't care, then re-run `config checkout`.
+
+** Updating
+
+#+BEGIN_SRC sh
+config pull && ./bootstrap.sh
+#+END_SRC
