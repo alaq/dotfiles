@@ -7,7 +7,7 @@ bold () {
 
 # Add ppa
 bold "Adding PPAs"
-# sudo add-apt-repository ppa:kelleyk/emacs -y
+sudo add-apt-repository ppa:kelleyk/emacs -y
 # sudo add-apt-repository ppa:kgilmer/speed-ricer -y
 
 bold "Updating Ubuntu's packages"
