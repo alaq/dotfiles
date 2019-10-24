@@ -3,7 +3,7 @@
 
 NOW=`date`
 
-rclone sync dropbox:org $HOME/.org-staging
+rclone sync dropbox:org $HOME/.org-staging --exclude="*.ics"
 [ ! -d "$HOME/.git-org" ] &&
     [ -f "$HOME/.org-staging/tasks.org" ] &&
     echo "Initializing note folders and repos" &&
@@ -18,4 +18,4 @@ git -C $HOME/org commit -am "$NOW"
 git -C $HOME/org pull --no-edit
 git -C $HOME/org push
 /usr/bin/git --git-dir=$HOME/.git-org/ --work-tree=$HOME/.org-staging checkout -f
-rclone sync $HOME/.org-staging dropbox:org
+rclone sync $HOME/.org-staging dropbox:org --exclude="*.ics"
