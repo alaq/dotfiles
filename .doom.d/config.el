@@ -126,3 +126,7 @@ you're done. This can be called from an external shell script."
         ('error
          (message "org-capture: %s" (error-message-string ex))
          (delete-frame frame))))))
+
+(require 'exwm)
+(require 'exwm-config)
+(exwm-config-default)
