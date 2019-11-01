@@ -28,8 +28,6 @@
       org-log-done 'time)
 
 (add-hook 'auto-save-hook 'org-save-all-org-buffers)
-;; (remove-hook! 'org-mode-hook #'display-line-numbers-mode)
-(add-hook 'org-mode-hook #'display-line-numbers-mode)
 
 (after! org
   (map! :map org-mode-map
@@ -53,18 +51,19 @@
                  :empty-lines 1))
   (add-to-list 'org-capture-templates
                '("j" "Journal" entry
-                 (file+datetree "~/org/journal.org")
+                 (file+olp+datetree "~/org/journal.org")
                  "* %?\n %T"
                  :empty-lines 1))
   (add-to-list 'org-capture-templates
                '("d" "DONE" entry
-                 (file+datetree "~/org/journal.org")
+                 (file+olp+datetree "~/org/journal.org")
                  "* DONE %?\n %T"
                  :empty-lines 1)))
 
 ;; Other settings
-(projectile-add-known-project "/mnt/c/cats")
-(projectile-add-known-project "~/org")
+(after! projectile
+  (projectile-add-known-project "/mnt/c/cats")
+  (projectile-add-known-project "~/org"))
 
 (setq
   blink-cursor-mode t
@@ -73,9 +72,6 @@
   ;; doom-big-font (font-spec :family "SF Mono" :size 36)
   ;; doom-variable-pitch-font (font-spec :family "Avenir Next" :size 18)
   display-line-numbers-type 'relative)
-
-
-
 
 ;; External frame from ./module...
 
