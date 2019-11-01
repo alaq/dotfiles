@@ -70,3 +70,7 @@ alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 git clone --bare https://github.com/alaq/dotfiles.git $HOME/.dotfiles 2> /dev/null || /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
+
+bold "Installing exwm"
+cd $HOME/exwm-gnome
+sudo make install
