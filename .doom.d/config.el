@@ -123,6 +123,72 @@ you're done. This can be called from an external shell script."
          (message "org-capture: %s" (error-message-string ex))
          (delete-frame frame))))))
 
-(require 'exwm)
-(require 'exwm-config)
-(exwm-config-default)
+(defun exwm-config-custom ()
+  "Default configuration of EXWM. But customized slightly."
+  ;; Set the initial workspace number.
+  (unless (get 'exwm-workspace-number 'saved-value)
+    (setq exwm-workspace-number 4))
+  ;; Make class name the buffer name
+  (add-hook 'exwm-update-class-hook
+            (lambda ()
+              (exwm-workspace-rename-buffer exwm-class-name)))
+  ;; Global keybindings.
+  (unless (get 'exwm-input-global-keys 'saved-value)
+    (setq exwm-input-global-keys
+          `(
+            ;; 's-r': Reset (to line-mode).
+            ([?\s-r] . exwm-reset)
+            ;; 's-w': Switch workspace.
+            ([?\s-w] . exwm-workspace-switch)
+            ;; 's-&': Launch application.
+            ([?\s-&] . (lambda (command)
+                         (interactive (list (read-shell-command "$ ")))
+                         (start-process-shell-command command nil command)))
+            ;; 's-N': Switch to certain workspace.
+            ,@(mapcar (lambda (i)
+                        `(,(kbd (format "s-%d" i)) .
+                          (lambda ()
+                            (interactive)
+                            (exwm-workspace-switch-create ,i))))
+                      (number-sequence 0 9)))))
+  ;; Line-editing shortcuts
+  (unless (get 'exwm-input-simulation-keys 'saved-value)
+    (setq exwm-input-simulation-keys
+          '(([?\C-b] . [left])
+            ([?\C-f] . [right])
+            ([?\C-p] . [up])
+            ([?\C-n] . [down])
+            ([?\C-a] . [home])
+            ([?\C-e] . [end])
+            ([?\M-v] . [prior])
+            ([?\C-v] . [next])
+            ([?\C-d] . [delete])
+            ([?\C-k] . [S-end delete]))))
+  ;; Enable EXWM
+  (exwm-enable)
+  ;; Configure Ido
+  ;; (exwm-config-ido)
+  ;; Other configurations
+  (exwm-config-misc))
+
+(after! exwm
+  (require 'exwm-config)
+
+  (exwm-config-custom)
+  (exwm-input-set-key (kbd "M-h") #'evil-window-left)
+  (exwm-input-set-key (kbd "M-j") #'evil-window-down)
+  (exwm-input-set-key (kbd "M-k") #'evil-window-up )
+  (exwm-input-set-key (kbd "M-l") #'evil-window-right)
+  (exwm-input-set-key (kbd "M-RET") #'eshell-toggle) ; Currently not working
+  (exwm-input-set-key (kbd "M-b") #'exwm-workspace-switch-to-buffer)
+  (push ?\M-\  exwm-input-prefix-keys)
+  (setq persp-init-frame-behaviour nil)
+
+  ;; in normal state/line mode, use the familiar i key to switch to input state
+  ;; from https://github.com/timor/spacemacsOS/blob/master/packages.el#L152
+  (evil-define-key 'normal exwm-mode-map (kbd "i") 'exwm-input-release-keyboard)
+  (push ?\i exwm-input-prefix-keys)
+
+  ;; TODO make the below work for good buffer switching
+  ;; (add-hook 'exwm-buffer-mode-hook #'doom-mark-buffer-as-real-h)
+  )

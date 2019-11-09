@@ -1,5 +1,4 @@
 * dotfiles
-
 ** Features
 - unified appearance accross emacs, vscode, i3, rofi, gtk, firefox
 - i3 with [[https://github.com/i3-gnome/i3-gnome][GNOME session integration]], to manage power, sound, GTK theme, media
@@ -23,3 +22,7 @@ The step above might fail. This is because your $HOME folder might already have 
 #+BEGIN_SRC sh
 config pull && ./bootstrap.sh
 #+END_SRC
+
+** Tips and tricks
+
+- If you add files to be tracked by mistake, you can remove them by running ~config reset .~.
