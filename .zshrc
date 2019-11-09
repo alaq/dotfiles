@@ -21,6 +21,9 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
 
+# Set emacs as default editor
+export EDITOR=/usr/bin/emacs
+
 # vi mode
 # bindkey -v
 # export KEYTIMEOUT=1
