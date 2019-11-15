@@ -29,6 +29,10 @@
 
 (add-hook 'auto-save-hook 'org-save-all-org-buffers)
 
+(global-emojify-mode)
+(display-time-mode)
+(display-battery-mode)
+
 (after! org
   (map! :map org-mode-map
         :n "M-j" #'org-metadown
@@ -166,8 +170,7 @@ you're done. This can be called from an external shell script."
             ([?\C-k] . [S-end delete]))))
   ;; Enable EXWM
   (exwm-enable)
-  ;; Configure Ido
-  ;; (exwm-config-ido)
+  (exwm-init)
   ;; Other configurations
   (exwm-config-misc))
 
@@ -179,16 +182,38 @@ you're done. This can be called from an external shell script."
   (exwm-input-set-key (kbd "M-j") #'evil-window-down)
   (exwm-input-set-key (kbd "M-k") #'evil-window-up )
   (exwm-input-set-key (kbd "M-l") #'evil-window-right)
+  (exwm-input-set-key (kbd "M-y") #'evil-window-decrease-width)
+  (exwm-input-set-key (kbd "M-u") #'evil-window-decrease-height)
+  (exwm-input-set-key (kbd "M-i") #'evil-window-increase-height)
+  (exwm-input-set-key (kbd "M-o") #'evil-window-increase-width)
+  (exwm-input-set-key (kbd "M-SPC") #'counsel-linux-app)
+  (exwm-input-set-key (kbd "M-f") #'doom/window-maximize-buffer)
   (exwm-input-set-key (kbd "M-RET") #'eshell-toggle) ; Currently not working
   (exwm-input-set-key (kbd "M-b") #'exwm-workspace-switch-to-buffer)
-  (push ?\M-\  exwm-input-prefix-keys)
-  (setq persp-init-frame-behaviour nil)
+  (evil-set-initial-state 'exwm-mode 'normal)
 
   ;; in normal state/line mode, use the familiar i key to switch to input state
   ;; from https://github.com/timor/spacemacsOS/blob/master/packages.el#L152
   (evil-define-key 'normal exwm-mode-map (kbd "i") 'exwm-input-release-keyboard)
   (push ?\i exwm-input-prefix-keys)
 
-  ;; TODO make the below work for good buffer switching
-  ;; (add-hook 'exwm-buffer-mode-hook #'doom-mark-buffer-as-real-h)
-  )
+  (push ?\  exwm-input-prefix-keys))
+
+(defun spacemacs/exwm-switch-to-buffer-or-run (window-class command)
+  "Switch to first buffer with window-class, and if not present, run command."
+  (let ((buffer
+         (find window-class (buffer-list) :key (lambda(b) (cdr (assoc 'exwm-class-name (buffer-local-variables b)))) :test 'string-equal)))
+    (if buffer
+        (exwm-workspace-switch-to-buffer buffer)
+      (start-process-shell-command command nil command))))
+
+(defun spacemacs/exwm-bind-switch-to-or-run-command (key window-class command)
+  (exwm-input-set-key (kbd key)
+                      `(lambda ()
+                         (interactive)
+                         (spacemacs/exwm-switch-to-buffer-or-run ,window-class ,command))))
+
+(spacemacs/exwm-bind-switch-to-or-run-command "s-f" "Firefox" "firefox")
+
+;;;; turn off display-line-numbers in org-mode
+(add-hook 'org-mode-hook #'doom-disable-line-numbers-h)
