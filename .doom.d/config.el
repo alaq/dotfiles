@@ -127,6 +127,12 @@ you're done. This can be called from an external shell script."
          (message "org-capture: %s" (error-message-string ex))
          (delete-frame frame))))))
 
+
+(after! ivy-posframe
+  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-window-center)))
+  (setq ivy-posframe-parameters '((parent-frame nil)))
+  (ivy-posframe-mode 1))
+
 (defun exwm-config-custom ()
   "Default configuration of EXWM. But customized slightly."
   ;; Set the initial workspace number.

@@ -7,3 +7,4 @@
 ;; (package! builtin-package :disable t)
 (package! emojify)
 (package! exwm)
+(package! ivy-posframe)
