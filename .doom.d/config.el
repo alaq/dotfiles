@@ -127,10 +127,6 @@ you're done. This can be called from an external shell script."
          (message "org-capture: %s" (error-message-string ex))
          (delete-frame frame))))))
 
-(after! ivy-posframe
-  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
-  (setq ivy-posframe-parameters '((parent-frame nil)))
-  (ivy-posframe-mode))
 
 (defun exwm-config-custom ()
   "Default configuration of EXWM. But customized slightly."
@@ -221,3 +217,30 @@ you're done. This can be called from an external shell script."
 
 ;; turn off display-line-numbers in org-mode
 (add-hook 'org-mode-hook #'doom-disable-line-numbers-h)
+
+(after! ivy-posframe
+  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
+  (setq ivy-posframe-parameters '((parent-frame nil)))
+  (ivy-posframe-mode))
+
+  (defun pnh-trim-non-ff ()
+    (delete-if-not (apply-partially 'string-match "- Mozilla Firefox$")
+                   ido-temp-list))
+
+  (add-hook 'exwm-manage-finish-hook
+            (defun pnh-exwm-manage-hook ()
+              (when (string-match "Firefox" exwm-class-name)
+                ;; (exwm-workspace-move-window 3)
+                ;; (exwm-layout-hide-mode-line)
+                (setq ido-make-buffer-list-hook 'pnh-trim-non-ff))
+              (when (string-match "Chromium" exwm-class-name)
+                ;; (exwm-workspace-move-window 1)
+                ;; (exwm-layout-hide-mode-line)
+                )))
+
+  (add-hook 'exwm-update-title-hook
+            (defun pnh-exwm-title-hook ()
+              (when (string-match "Firefox" exwm-class-name)
+                (exwm-workspace-rename-buffer exwm-title))))
+
+  (setq browse-url-firefox-arguments '("-new-window"))
