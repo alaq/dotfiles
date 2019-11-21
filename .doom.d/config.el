@@ -11,7 +11,11 @@
       :ni "C-h" #'evil-window-left
       :ni "C-j" #'evil-window-down
       :ni "C-k" #'evil-window-up
-      :ni "C-l" #'evil-window-right)
+      :ni "C-l" #'evil-window-right
+      ;; This is meant to be temporary until the solution to https://github.com/hlissner/doom-emacs/issues/1799 is found
+      :leader
+      (:prefix "b"
+        :desc "Switch buffer" "b" #'counsel-switch-buffer))
 
 ;; org-mode
 (setq org-directory "~/org/"
@@ -26,8 +30,6 @@
       +org-capture-todo-file "tasks.org"
       org-use-property-inheritance t
       org-log-done 'time)
-
-(add-hook 'auto-save-hook 'org-save-all-org-buffers)
 
 (global-emojify-mode)
 (display-time-mode)
@@ -72,9 +74,6 @@
 (setq
   blink-cursor-mode t
   projectile-project-search-path '("~/git/")
-  ;; doom-font (font-spec :family "SF Mono" :size 20)
-  ;; doom-big-font (font-spec :family "SF Mono" :size 36)
-  ;; doom-variable-pitch-font (font-spec :family "Avenir Next" :size 18)
   display-line-numbers-type 'relative)
 
 ;; External frame from ./module...
@@ -127,11 +126,10 @@ you're done. This can be called from an external shell script."
          (message "org-capture: %s" (error-message-string ex))
          (delete-frame frame))))))
 
-
 (after! ivy-posframe
-  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-window-center)))
+  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
   (setq ivy-posframe-parameters '((parent-frame nil)))
-  (ivy-posframe-mode 1))
+  (ivy-posframe-mode))
 
 (defun exwm-config-custom ()
   "Default configuration of EXWM. But customized slightly."
@@ -202,7 +200,6 @@ you're done. This can be called from an external shell script."
   ;; from https://github.com/timor/spacemacsOS/blob/master/packages.el#L152
   (evil-define-key 'normal exwm-mode-map (kbd "i") 'exwm-input-release-keyboard)
   (push ?\i exwm-input-prefix-keys)
-
   (push ?\  exwm-input-prefix-keys))
 
 (defun spacemacs/exwm-switch-to-buffer-or-run (window-class command)
@@ -221,5 +218,5 @@ you're done. This can be called from an external shell script."
 
 (spacemacs/exwm-bind-switch-to-or-run-command "s-f" "Firefox" "firefox")
 
-;;;; turn off display-line-numbers in org-mode
+;; turn off display-line-numbers in org-mode
 (add-hook 'org-mode-hook #'doom-disable-line-numbers-h)
