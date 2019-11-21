@@ -34,6 +34,7 @@
 (display-battery-mode)
 
 (after! org
+  (set-face-attribute 'outline-1 nil :background nil) ; remove background from org-level-1 headers
   (map! :map org-mode-map
         :n "M-j" #'org-metadown
         :n "M-k" #'org-metaup)
