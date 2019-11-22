@@ -223,24 +223,6 @@ you're done. This can be called from an external shell script."
   (setq ivy-posframe-parameters '((parent-frame nil)))
   (ivy-posframe-mode))
 
-  (defun pnh-trim-non-ff ()
-    (delete-if-not (apply-partially 'string-match "- Mozilla Firefox$")
-                   ido-temp-list))
-
-  (add-hook 'exwm-manage-finish-hook
-            (defun pnh-exwm-manage-hook ()
-              (when (string-match "Firefox" exwm-class-name)
-                ;; (exwm-workspace-move-window 3)
-                ;; (exwm-layout-hide-mode-line)
-                (setq ido-make-buffer-list-hook 'pnh-trim-non-ff))
-              (when (string-match "Chromium" exwm-class-name)
-                ;; (exwm-workspace-move-window 1)
-                ;; (exwm-layout-hide-mode-line)
-                )))
-
-  (add-hook 'exwm-update-title-hook
-            (defun pnh-exwm-title-hook ()
-              (when (string-match "Firefox" exwm-class-name)
-                (exwm-workspace-rename-buffer exwm-title))))
-
-  (setq browse-url-firefox-arguments '("-new-window"))
+(after! persp-mode
+  (remove-hook 'persp-add-buffer-on-after-change-major-mode-filter-functions
+               #'doom-unreal-buffer-p))
