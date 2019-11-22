@@ -2,20 +2,13 @@
 
 ;; UI
 
-;(setq doom-font (font-spec :family "Fira Code" :size 12)
-;      doom-variable-pitch-font (font-spec :family "Noto Sans" :size 13))
-
 ;; Keybindings
 (map!
       ;; Easier window movement
       :ni "C-h" #'evil-window-left
       :ni "C-j" #'evil-window-down
       :ni "C-k" #'evil-window-up
-      :ni "C-l" #'evil-window-right
-      ;; This is meant to be temporary until the solution to https://github.com/hlissner/doom-emacs/issues/1799 is found
-      :leader
-      (:prefix "b"
-        :desc "Switch buffer" "b" #'ivy-switch-buffer))
+      :ni "C-l" #'evil-window-right)
 
 ;; org-mode
 (setq org-directory "~/org/"
@@ -223,6 +216,4 @@ you're done. This can be called from an external shell script."
   (setq ivy-posframe-parameters '((parent-frame nil)))
   (ivy-posframe-mode))
 
-(after! persp-mode
-  (remove-hook 'persp-add-buffer-on-after-change-major-mode-filter-functions
-               #'doom-unreal-buffer-p))
+(add-hook 'exwm-mode-hook #'doom-mark-buffer-as-real-h)
