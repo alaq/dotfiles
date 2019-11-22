@@ -15,7 +15,7 @@
       ;; This is meant to be temporary until the solution to https://github.com/hlissner/doom-emacs/issues/1799 is found
       :leader
       (:prefix "b"
-        :desc "Switch buffer" "b" #'counsel-switch-buffer))
+        :desc "Switch buffer" "b" #'ivy-switch-buffer))
 
 ;; org-mode
 (setq org-directory "~/org/"
