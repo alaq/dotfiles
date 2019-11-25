@@ -8,7 +8,10 @@
       :ni "C-h" #'evil-window-left
       :ni "C-j" #'evil-window-down
       :ni "C-k" #'evil-window-up
-      :ni "C-l" #'evil-window-right)
+      :ni "C-l" #'evil-window-right
+      :leader
+      (:prefix "w"
+        :desc "Open new window" "n" #'evil-window-vnew))
 
 ;; org-mode
 (setq org-directory "~/org/"
