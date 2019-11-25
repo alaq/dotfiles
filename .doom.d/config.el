@@ -46,22 +46,22 @@
                '("td" "Todo" entry
                  (file+headline "~/org/tasks.org")
                  "* THEN %?\n %U"
-                 :empty-lines 1))
+                 :empty-lines 0))
   (add-to-list 'org-capture-templates
                '("wt" "Work item" entry
                  (file+headline "~/org/tasks.org" "Next")
                  "* THEN %?\n %U"
-                 :empty-lines 1))
+                 :empty-lines 0))
   (add-to-list 'org-capture-templates
                '("j" "Journal" entry
                  (file+olp+datetree "~/org/journal.org")
                  "* %?\n %T"
-                 :empty-lines 1))
+                 :empty-lines 0))
   (add-to-list 'org-capture-templates
                '("d" "DONE" entry
                  (file+olp+datetree "~/org/journal.org")
                  "* DONE %?\n %T"
-                 :empty-lines 1)))
+                 :empty-lines 0)))
 
 ;; Other settings
 (after! projectile
