@@ -227,20 +227,13 @@ you're done. This can be called from an external shell script."
   (let ((left (car (window-edges)))
         (right (car (cdr (cdr (window-edges))))))
     (if (= left 0)
-        (progn
-          (message "decreasing width")
-          (evil-window-decrease-width 10))
+        (evil-window-decrease-width 10)
       (if (= right 213)
           (progn
-            (message "decreasing other window")
             (other-window -1)
             (evil-window-decrease-width 10)
             (other-window 1))
-        (progn
-          (message "increasing window")
-          (other-window -1)
-          (evil-window-decrease-width 10)
-          (other-window 1))))))
+        (evil-window-decrease-width 10)))))
 
 (defun evil-move-divider-to-right ()
   "Move divider to the right."
@@ -250,15 +243,10 @@ you're done. This can be called from an external shell script."
     (message "%s" left)
     (message "%s" right)
     (if (= left 0)
-        (progn
-          (message "increase width")
-          (evil-window-increase-width 10))
+        (evil-window-increase-width 10)
       (if (= right 213)
-          (progn
-            (message "decrease width")
-            (evil-window-decrease-width 10))
+          (evil-window-decrease-width 10)
         (progn
-          (message "decrease other window's width")
           (other-window 1)
           (evil-window-decrease-width 10)
           (other-window -1))))))
