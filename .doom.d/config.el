@@ -179,10 +179,10 @@ you're done. This can be called from an external shell script."
   (exwm-input-set-key (kbd "M-j") #'evil-window-down)
   (exwm-input-set-key (kbd "M-k") #'evil-window-up )
   (exwm-input-set-key (kbd "M-l") #'evil-window-right)
-  (exwm-input-set-key (kbd "M-y") #'evil-window-decrease-width)
+  (exwm-input-set-key (kbd "M-y") #'evil-move-divider-to-left)
   (exwm-input-set-key (kbd "M-u") #'evil-window-decrease-height)
   (exwm-input-set-key (kbd "M-i") #'evil-window-increase-height)
-  (exwm-input-set-key (kbd "M-o") #'evil-window-increase-width)
+  (exwm-input-set-key (kbd "M-o") #'evil-move-divider-to-right)
   (exwm-input-set-key (kbd "M-SPC") #'counsel-linux-app)
   (exwm-input-set-key (kbd "M-f") #'doom/window-maximize-buffer)
   (exwm-input-set-key (kbd "M-RET") #'eshell-toggle) ; Currently not working
@@ -220,3 +220,45 @@ you're done. This can be called from an external shell script."
   (ivy-posframe-mode))
 
 (add-hook 'exwm-mode-hook #'doom-mark-buffer-as-real-h)
+
+(defun evil-move-divider-to-left ()
+  "Move divider to the left."
+  (interactive)
+  (let ((left (car (window-edges)))
+        (right (car (cdr (cdr (window-edges))))))
+    (if (= left 0)
+        (progn
+          (message "decreasing width")
+          (evil-window-decrease-width 10))
+      (if (= right 213)
+          (progn
+            (message "decreasing other window")
+            (other-window -1)
+            (evil-window-decrease-width 10)
+            (other-window 1))
+        (progn
+          (message "increasing window")
+          (other-window -1)
+          (evil-window-decrease-width 10)
+          (other-window 1))))))
+
+(defun evil-move-divider-to-right ()
+  "Move divider to the right."
+  (interactive)
+  (let ((left (car (window-edges)))
+        (right (car (cdr (cdr (window-edges))))))
+    (message "%s" left)
+    (message "%s" right)
+    (if (= left 0)
+        (progn
+          (message "increase width")
+          (evil-window-increase-width 10))
+      (if (= right 213)
+          (progn
+            (message "decrease width")
+            (evil-window-decrease-width 10))
+        (progn
+          (message "decrease other window's width")
+          (other-window 1)
+          (evil-window-decrease-width 10)
+          (other-window -1))))))
