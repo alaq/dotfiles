@@ -252,3 +252,15 @@ you're done. This can be called from an external shell script."
           (other-window 1)
           (evil-window-decrease-width 10)
           (other-window -1))))))
+
+(defun sync-notes ()
+  "Sync notes, with the bash script."
+  (interactive)
+  (require 'core-cli)
+  (compile "mn")
+  (while compilation-in-progress
+    (sit-for 1))
+  (with-demoted-errors "SYNC ERROR: %s"
+    (message "There was an error?"))
+  ;; TODO (run-hook-wrapped 'compilation-finish-functions #'bury-compile-buffer-if-successful)
+  (message "Sync finished!"))
