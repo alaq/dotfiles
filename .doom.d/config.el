@@ -253,6 +253,36 @@ you're done. This can be called from an external shell script."
           (evil-window-decrease-width 10)
           (other-window -1))))))
 
+; The list returned has the form (LEFT TOP RIGHT BOTTOM).
+
+(defun evil-move-divider-to-up ()
+  "Move divider to the top."
+  (interactive)
+  (let ((top (car (cdr (window-edges))))
+        (bottom (car (cdr (cdr (cdr (window-edges)))))))
+    (if (= top 0)
+        (evil-window-decrease-height 10)
+      (if (= bottom 59)
+          (progn
+            (other-window -1)
+            (evil-window-decrease-height 10)
+            (other-window 1))
+        (evil-window-decrease-height 10)))))
+
+(defun evil-move-divider-to-down ()
+  "Move divider to the bottom."
+  (interactive)
+  (let ((top (car (cdr (window-edges))))
+        (bottom (car (cdr (cdr (cdr (window-edges)))))))
+    (if (= top 0)
+        (evil-window-increase-height 10)
+      (if (= bottom 59)
+          (evil-window-decrease-height 10)
+        (progn
+          (other-window 1)
+          (evil-window-decrease-height 10)
+          (other-window -1))))))
+
 (defun sync-notes ()
   "Sync notes, with the bash script."
   (interactive)
