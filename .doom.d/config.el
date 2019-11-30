@@ -20,7 +20,7 @@
       org-bullets-bullet-list '("#")
       org-startup-indented t
       org-startup-with-inline-images t
-      ;; org-agenda-files (quote ("~/org/tasks.org" "~/org/journal.org"))
+      org-agenda-files (quote ("~/org/tasks.org" "~/org/journal.org"))
       org-agenda-skip-scheduled-if-done t
       org-agenda-files (ignore-errors (directory-files +org-dir t "\\.org$" t))
       +org-capture-todo-file "tasks.org"
@@ -138,6 +138,10 @@ you're done. This can be called from an external shell script."
     (setq exwm-input-global-keys
           `(
             ;; 's-r': Reset (to line-mode).
+            ([?\M-y] . evil-move-divider-to-left)
+            ;; 's-r': Reset (to line-mode).
+            ([?\M-o] . evil-move-divider-to-right)
+            ;; 's-r': Reset (to line-mode).
             ([?\s-r] . exwm-reset)
             ;; 's-w': Switch workspace.
             ([?\s-w] . exwm-workspace-switch)
@@ -179,10 +183,8 @@ you're done. This can be called from an external shell script."
   (exwm-input-set-key (kbd "M-j") #'evil-window-down)
   (exwm-input-set-key (kbd "M-k") #'evil-window-up )
   (exwm-input-set-key (kbd "M-l") #'evil-window-right)
-  (exwm-input-set-key (kbd "M-y") #'evil-move-divider-to-left)
   (exwm-input-set-key (kbd "M-u") #'evil-window-decrease-height)
   (exwm-input-set-key (kbd "M-i") #'evil-window-increase-height)
-  (exwm-input-set-key (kbd "M-o") #'evil-move-divider-to-right)
   (exwm-input-set-key (kbd "M-SPC") #'counsel-linux-app)
   (exwm-input-set-key (kbd "M-f") #'doom/window-maximize-buffer)
   (exwm-input-set-key (kbd "M-RET") #'eshell-toggle) ; Currently not working
