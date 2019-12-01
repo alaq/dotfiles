@@ -290,7 +290,12 @@ you're done. This can be called from an external shell script."
   (compile "mn")
   (while compilation-in-progress
     (sit-for 1))
-  (with-demoted-errors "SYNC ERROR: %s"
-    (message "There was an error?"))
-  ;; TODO (run-hook-wrapped 'compilation-finish-functions #'bury-compile-buffer-if-successful)
+  (other-popup)
+  (+popup/close)
   (message "Sync finished!"))
+
+(defun org-counsel-goto-and-narrow ()
+  "Go to a heading and narrow to it."
+  (interactive)
+  (counsel-org-goto)
+  (org-narrow-to-subtree))
