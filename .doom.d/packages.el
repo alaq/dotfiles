@@ -8,3 +8,6 @@
 (package! emojify)
 (package! exwm)
 (package! ivy-posframe)
+(package! esh-autosuggest)
+(package! org-mime)
+(package! smtpmail)

@@ -5,10 +5,10 @@
 ;; Keybindings
 (map!
       ;; Easier window movement
-      :ni "C-h" #'evil-window-left
-      :ni "C-j" #'evil-window-down
-      :ni "C-k" #'evil-window-up
-      :ni "C-l" #'evil-window-right
+      ;; :ni "C-h" #'evil-window-left
+      ;; :ni "C-j" #'evil-window-down
+      ;; :ni "C-k" #'evil-window-up
+      ;; :ni "C-l" #'evil-window-right
       :leader
       (:prefix "w"
         :desc "Open new window" "n" #'evil-window-vnew))
@@ -72,57 +72,6 @@
   blink-cursor-mode t
   projectile-project-search-path '("~/git/")
   display-line-numbers-type 'relative)
-
-;; External frame from ./module...
-
-;;;###autoload
-(defvar +org-capture-frame-parameters-temp
-  `((name . "org-capture")
-    (width . 70)
-    (height . 50)
-    (transient . t)
-    ,(if IS-LINUX '(display . "172.25.112.1:0")))
-  "TODO")
-
-;;;###autoload
-(defun +org-capture/open-frame-temp (&optional initial-input key)
-  "Opens the org-capture window in a floating frame that cleans itself up once
-you're done. This can be called from an external shell script."
-  (interactive)
-  (when (and initial-input (string-empty-p initial-input))
-    (setq initial-input nil))
-  (when (and key (string-empty-p key))
-    (setq key nil))
-  (let* ((frame-title-format "")
-         (frame (if (+org-capture-frame-p)
-                    (selected-frame)
-                  (make-frame +org-capture-frame-parameters-temp))))
-    (select-frame-set-input-focus frame)  ; fix MacOS not focusing new frames
-    (with-selected-frame frame
-      (require 'org-capture)
-      (condition-case ex
-          (cl-letf (((symbol-function #'pop-to-buffer)
-                     (symbol-function #'switch-to-buffer)))
-            (switch-to-buffer (doom-fallback-buffer))
-            (let ((org-capture-initial initial-input)
-                  org-capture-entry)
-              (when (and key (not (string-empty-p key)))
-                (setq org-capture-entry (org-capture-select-template key)))
-              (if (or org-capture-entry
-                      (not (fboundp 'counsel-org-capture)))
-                  (org-capture)
-                (unwind-protect
-                    (counsel-org-capture)
-                  (if-let* ((buf (cl-loop for buf in (buffer-list)
-                                          if (buffer-local-value 'org-capture-mode buf)
-                                          return buf)))
-                      (with-current-buffer buf
-                        (add-hook 'kill-buffer-hook #'+org-capture-cleanup-frame-h nil t))
-                    (delete-frame frame))))))
-        ('error
-         (message "org-capture: %s" (error-message-string ex))
-         (delete-frame frame))))))
-
 
 (defun exwm-config-custom ()
   "Default configuration of EXWM. But customized slightly."
@@ -242,8 +191,6 @@ you're done. This can be called from an external shell script."
   (interactive)
   (let ((left (car (window-edges)))
         (right (car (cdr (cdr (window-edges))))))
-    (message "%s" left)
-    (message "%s" right)
     (if (= left 0)
         (evil-window-increase-width 10)
       (if (= right 213)
@@ -287,7 +234,7 @@ you're done. This can be called from an external shell script."
   "Sync notes, with the bash script."
   (interactive)
   (require 'core-cli)
-  (compile "mn")
+  (compile "sync-notes")
   (while compilation-in-progress
     (sit-for 1))
   (other-popup)
@@ -299,3 +246,42 @@ you're done. This can be called from an external shell script."
   (interactive)
   (counsel-org-goto)
   (org-narrow-to-subtree))
+
+(load! "config-mu4e")
+
+;; JavaScript and TypeScript configuration
+
+;; LSP requirements on the server
+;; sudo npm i -g typescript-language-server; sudo npm i -g typescript
+;; sudo npm i -g javascript-typescript-langserver
+(setq lsp-prefer-flymake nil)
+
+(after! lsp-mode
+  (add-hook 'js2-mode-hook 'lsp)
+  (add-hook 'php-mode 'lsp)
+  (add-hook 'css-mode 'lsp)
+  (add-hook 'web-mode 'lsp))
+
+(setq lsp-language-id-configuration '((python-mode . "python")
+                                      (css-mode . "css")
+                                      (web-mode . "html")
+                                      (html-mode . "html")
+                                      (json-mode . "json")
+                                      (js2-mode . "javascript")))
+
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  (company-mode +1))
+
+;; aligns annotation to the right hand side
+(setq company-tooltip-align-annotations t)
+
+;; formats the buffer before saving
+(add-hook 'before-save-hook 'tide-format-before-save)
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
+(add-hook 'js2-mode-hook #'setup-tide-mode)
