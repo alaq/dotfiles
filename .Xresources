@@ -20,9 +20,9 @@
 ! #define bg blk
 #define fg wht
 
-*.foreground:  fg
-*.background:  bg
-*.cursorColor: mag
+*.foreground:  #c5c8c6
+*.background:  #282c34
+*.cursorColor: #b294bb
 
 *.color0:  blk
 *.color8:  bblk
