@@ -100,11 +100,11 @@
                          (start-process-shell-command command nil command)))
             ;; 's-N': Switch to certain workspace.
             ,@(mapcar (lambda (i)
-                        `(,(kbd (format "s-%d" i)) .
+                        `(,(kbd (format "s-%d" (+ 1 i))) .
                           (lambda ()
                             (interactive)
-                            (exwm-workspace-switch-create ,i))))
-                      (number-sequence 0 9)))))
+                            (+workspace/switch-to ,i))))
+                      (number-sequence 0 8)))))
   ;; Line-editing shortcuts
   (unless (get 'exwm-input-simulation-keys 'saved-value)
     (setq exwm-input-simulation-keys
