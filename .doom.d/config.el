@@ -4,11 +4,6 @@
 
 ;; Keybindings
 (map!
-      ;; Easier window movement
-      ;; :ni "C-h" #'evil-window-left
-      ;; :ni "C-j" #'evil-window-down
-      ;; :ni "C-k" #'evil-window-up
-      ;; :ni "C-l" #'evil-window-right
       :leader
       (:prefix "w"
         :desc "Open new window" "n" #'evil-window-vnew))
@@ -82,6 +77,16 @@
   (add-hook 'exwm-update-class-hook
             (lambda ()
               (exwm-workspace-rename-buffer exwm-class-name)))
+
+  ;; Multiple monitor setup
+  (setq exwm-randr-workspace-monitor-plist '(1 "DP2" 2 "eDP1"))
+  (add-hook 'exwm-randr-screen-change-hook
+            (lambda ()
+              (start-process-shell-command
+               "xrandr" nil "xrandr --output DP2 --above eDP1 --auto")))
+  (message "Enabling multiple monitors!")
+  (exwm-randr-enable)
+
   ;; Global keybindings.
   (unless (get 'exwm-input-global-keys 'saved-value)
     (setq exwm-input-global-keys

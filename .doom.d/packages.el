@@ -11,3 +11,4 @@
 (package! esh-autosuggest)
 (package! org-mime)
 (package! smtpmail)
+(package! exwm-randr)
