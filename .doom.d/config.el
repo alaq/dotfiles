@@ -72,13 +72,14 @@
   "Default configuration of EXWM. But customized slightly."
   ;; Set the initial workspace number.
   (unless (get 'exwm-workspace-number 'saved-value)
-    (setq exwm-workspace-number 4))
+    (setq exwm-workspace-number 2))
   ;; Make class name the buffer name
   (add-hook 'exwm-update-class-hook
             (lambda ()
               (exwm-workspace-rename-buffer exwm-class-name)))
 
   ;; Multiple monitor setup
+  (require 'exwm-randr)
   (setq exwm-randr-workspace-monitor-plist '(1 "DP2" 2 "eDP1"))
   (add-hook 'exwm-randr-screen-change-hook
             (lambda ()
@@ -91,9 +92,9 @@
   (unless (get 'exwm-input-global-keys 'saved-value)
     (setq exwm-input-global-keys
           `(
-            ;; 's-r': Reset (to line-mode).
+            ([?\M-i] . evil-move-divider-to-up)
+            ([?\M-u] . evil-move-divider-to-down)
             ([?\M-y] . evil-move-divider-to-left)
-            ;; 's-r': Reset (to line-mode).
             ([?\M-o] . evil-move-divider-to-right)
             ;; 's-r': Reset (to line-mode).
             ([?\s-r] . exwm-reset)
@@ -129,6 +130,7 @@
   ;; Other configurations
   (exwm-config-misc))
 
+(require 'exwm)
 (after! exwm
   (require 'exwm-config)
 
@@ -170,11 +172,6 @@
 ;; turn off display-line-numbers in org-mode
 (add-hook 'org-mode-hook #'doom-disable-line-numbers-h)
 
-(after! ivy-posframe
-  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
-  (setq ivy-posframe-parameters '((parent-frame nil)))
-  (ivy-posframe-mode))
-
 (add-hook 'exwm-mode-hook #'doom-mark-buffer-as-real-h)
 
 (defun evil-move-divider-to-left ()
@@ -204,8 +201,6 @@
           (other-window 1)
           (evil-window-decrease-width 10)
           (other-window -1))))))
-
-; The list returned has the form (LEFT TOP RIGHT BOTTOM).
 
 (defun evil-move-divider-to-up ()
   "Move divider to the top."
@@ -252,7 +247,7 @@
   (counsel-org-goto)
   (org-narrow-to-subtree))
 
-(load! "config-mu4e")
+(load! "config-mu4e" nil t)
 
 ;; JavaScript and TypeScript configuration
 
@@ -261,6 +256,7 @@
 ;; sudo npm i -g javascript-typescript-langserver
 (setq lsp-prefer-flymake nil)
 
+(require 'lsp-mode)
 (after! lsp-mode
   (add-hook 'js2-mode-hook 'lsp)
   (add-hook 'php-mode 'lsp)
