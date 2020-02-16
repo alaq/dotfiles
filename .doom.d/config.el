@@ -80,11 +80,11 @@
 
   ;; Multiple monitor setup
   (require 'exwm-randr)
-  (setq exwm-randr-workspace-monitor-plist '(1 "DP2" 2 "eDP1"))
+  (setq exwm-randr-workspace-monitor-plist '(1 "DP2-3" 2 "eDP1"))
   (add-hook 'exwm-randr-screen-change-hook
             (lambda ()
               (start-process-shell-command
-               "xrandr" nil "xrandr --output DP2 --above eDP1 --auto")))
+               "xrandr" nil "xrandr --output DP2-3 --above eDP1 --auto")))
   (message "Enabling multiple monitors!")
   (exwm-randr-enable)
 
@@ -286,3 +286,29 @@
 (add-hook 'before-save-hook 'tide-format-before-save)
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 (add-hook 'js2-mode-hook #'setup-tide-mode)
+
+;; For Persp + EXWM compatibility
+;; Source: https://www.reddit.com/r/emacs/comments/d8cd1h/a_simple_hack_for_persp_exwm_compatibility/
+(defun exwm--update-utf8-title-advice (oldfun id &optional force)
+"Only update the exwm-title when the buffer is visible."
+  (when (get-buffer-window (exwm--id->buffer id))
+    (funcall oldfun id force)))
+(advice-add #'exwm--update-utf8-title :around #'exwm--update-utf8-title-advice)
+
+
+(defun exwm-swap-monitors ()
+  "Swaps your workspaces, between two monitors."
+  (interactive)
+  (exwm-workspace-swap 1 2))
+
+(defun exwm-switch-to-monitors ()
+  "Swaps your workspaces, between two monitors."
+  (interactive)
+  (exwm-workspace-switch 1))
+
+(defun exwm-workspace-next (&optional reverse)
+  (interactive "P")
+  (let ((fn (if reverse #'- #'+)))
+    (exwm-workspace-switch (mod (apply fn (list 1 exwm-workspace-current-index))
+                                (- (length (frame-list)) 1)))))
+(exwm-input-set-key (kbd "s-j") 'exwm-workspace-next)

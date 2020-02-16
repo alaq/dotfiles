@@ -14,7 +14,7 @@ bold "Updating Ubuntu's packages"
 sudo apt update
 sudo apt upgrade -y
 bold "Installing software"
-sudo apt install git jq zsh emacs26 rxvt-unicode i3-wm dmenu i3status rofi fonts-font-awesome arc-theme rclone compton -y
+sudo apt install git jq zsh emacs26 rxvt-unicode i3-wm dmenu i3status rofi fonts-font-awesome arc-theme rclone -y
 # i3-gaps polybar
 
 is_wsl=$(cat /proc/version | grep "microsoft" | wc -l)
