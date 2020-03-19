@@ -349,7 +349,7 @@
 
 (defun org-roam-write-backlinks-to-file (file-path)
   "Show the backlinks for given org file for file at `FILE-PATH'."
-  (org-roam--db-ensure-built)
+  ;; (org-roam--db-ensure-built)
   (let* ((source-org-roam-directory org-roam-directory))
     (find-file file-path)
     (goto-char (point-max))
@@ -377,7 +377,7 @@
           (if-let* ((backlinks (org-roam--get-backlinks file-path))
                     (grouped-backlinks (--group-by (nth 0 it) backlinks)))
               (progn
-                (insert (format "\n\n* %d Backlinks\n"
+                (insert (format "* %d Backlinks\n"
                                 (length backlinks)))
                 (dolist (group grouped-backlinks)
                   (let ((file-from (car group))
@@ -395,7 +395,8 @@
                                  'file-from file-from
                                  'file-from-point (plist-get props :point)))
                         (insert "\n\n"))))))
-            (insert "\n\n* No backlinks!"))
+            (message "No backlink found"))
+            ;; (insert "\n\n* No backlinks!"))
           (save-buffer)
           (kill-buffer)
           ;; )
@@ -406,3 +407,31 @@
 (defun my/write-org-roam-backlinks ()
   (interactive)
   (mapc #'org-roam-write-backlinks-to-file (directory-files-recursively org-roam-directory "\\.org$" nil)))
+
+(defun my/clear-org-roam-backlinks ()
+  (interactive)
+  (mapc #'clear-backlinks-in-file (directory-files-recursively org-roam-directory "\\.org$" nil)))
+
+(defun clear-backlinks-in-file (file-path)
+  (find-file file-path)
+  (goto-char (point-min))
+  (condition-case nil
+      (progn
+        (search-forward "Backlinks\n" nil nil)
+        (backward-char)
+        (org-mark-subtree)
+        (delete-region (region-beginning) (region-end))
+        (save-buffer)
+        (kill-buffer))
+    (error nil)))
+
+(defun update-backlinks ()
+  (interactive)
+  (progn
+    (my/clear-org-roam-backlinks)
+    (org-roam-build-cache)
+    (my/write-org-roam-backlinks)))
+
+(defun clear-backlinks-in-this-file ()
+  (interactive)
+  (clear-backlinks-in-file buffer-file-name))
