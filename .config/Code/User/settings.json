@@ -22,7 +22,6 @@
     "workbench.editor.showIcons": false,
     "workbench.statusBar.visible": true,
     "window.menuBarVisibility": "hidden",
-    "eslint.autoFixOnSave": true,
     "vim.useSystemClipboard": true,
     "vim.overrideCopy": true,
     "vim.foldfix": true,
@@ -32,7 +31,6 @@
     "editor.fontFamily": "'Fira Code', 'Courier New', monospace",
     "editor.fontLigatures": true,
     "git.confirmSync": false,
-    "prettier.eslintIntegration": true,
     "prettier.tabWidth": 4,
     "prettier.printWidth": 80,
     "prettier.arrowParens": "always",
@@ -1202,5 +1200,8 @@
     "terminal.integrated.copyOnSelection": true,
     "[typescript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
     }
 }

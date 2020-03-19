@@ -12,7 +12,7 @@
 (setq org-directory "~/org/"
       org-ellipsis " ▼ "
       ;; org-ellipsis " ▾ "
-      org-bullets-bullet-list '("#")
+      ;; org-bullets-bullet-list '("#")
       org-startup-indented t
       org-startup-with-inline-images t
       org-agenda-files (quote ("~/org/tasks.org" "~/org/journal.org"))
@@ -247,28 +247,28 @@
   (counsel-org-goto)
   (org-narrow-to-subtree))
 
-(load! "config-mu4e" nil t)
+(load! "mu4e" nil t)
 
 ;; JavaScript and TypeScript configuration
 
 ;; LSP requirements on the server
 ;; sudo npm i -g typescript-language-server; sudo npm i -g typescript
 ;; sudo npm i -g javascript-typescript-langserver
-(setq lsp-prefer-flymake nil)
+;; (setq lsp-prefer-flymake nil)
 
-(require 'lsp-mode)
-(after! lsp-mode
-  (add-hook 'js2-mode-hook 'lsp)
-  (add-hook 'php-mode 'lsp)
-  (add-hook 'css-mode 'lsp)
-  (add-hook 'web-mode 'lsp))
+;; (require 'lsp-mode)
+;; (after! lsp-mode
+;;   (add-hook 'js2-mode-hook 'lsp)
+;;   (add-hook 'php-mode 'lsp)
+;;   (add-hook 'css-mode 'lsp)
+;;   (add-hook 'web-mode 'lsp))
 
-(setq lsp-language-id-configuration '((python-mode . "python")
-                                      (css-mode . "css")
-                                      (web-mode . "html")
-                                      (html-mode . "html")
-                                      (json-mode . "json")
-                                      (js2-mode . "javascript")))
+;; (setq lsp-language-id-configuration '((python-mode . "python")
+;;                                       (css-mode . "css")
+;;                                       (web-mode . "html")
+;;                                       (html-mode . "html")
+;;                                       (json-mode . "json")
+;;                                       (js2-mode . "javascript")))
 
 (defun setup-tide-mode ()
   (interactive)
@@ -312,3 +312,97 @@
     (exwm-workspace-switch (mod (apply fn (list 1 exwm-workspace-current-index))
                                 (- (length (frame-list)) 1)))))
 (exwm-input-set-key (kbd "s-j") 'exwm-workspace-next)
+
+(defun my/get-links-to-current-heading ()
+  (interactive)
+  (let ((title (nth 4 (org-heading-components))))
+    (occur (concat "\\[\\[" title "\\]\\["))))
+
+(use-package! org-roam
+  :commands (org-roam-insert org-roam-find-file org-roam)
+  :init
+  (setq org-roam-directory "~/org/")
+  (map! :leader
+        :prefix "n"
+        :desc "Org-Roam-Insert" "i" #'org-roam-insert
+        :desc "Org-Roam-Find"   "/" #'org-roam-find-file
+        :desc "Org-Roam-Buffer" "r" #'org-roam)
+  :config
+  (org-roam-mode +1))
+
+(defun my/org-roam--backlinks-list (file)
+  (if (org-roam--org-roam-file-p file)
+      (--reduce-from
+       (concat acc (format "- [[file:%s][%s]]\n"
+                           (file-relative-name (car it) org-roam-directory)
+                                 (org-roam--get-title-or-slug (car it))))
+       "" (org-roam-sql [:select [file-from] :from file-links :where (= file-to $s1)] file))
+    ""))
+
+(defun my/org-export-preprocessor ()
+  (interactive)
+  (let ((links (my/org-roam--backlinks-list (buffer-file-name))))
+    (unless (string= links "")
+      (save-excursion
+        (goto-char (point-max))
+        (insert (concat "\n* Backlinks\n") links)))))
+
+(defun org-roam-write-backlinks-to-file (file-path)
+  "Show the backlinks for given org file for file at `FILE-PATH'."
+  (org-roam--db-ensure-built)
+  (let* ((source-org-roam-directory org-roam-directory))
+    (find-file file-path)
+    (goto-char (point-max))
+    ;; (let ((buffer-title (org-roam--get-title-or-slug file-path)))
+      ;; (with-current-buffer org-roam-buffer
+        ;; When dir-locals.el is used to override org-roam-directory,
+        ;; org-roam-buffer should have a different local org-roam-directory and
+        ;; default-directory, as relative links are relative from the overridden
+        ;; org-roam-directory.
+        (setq-local org-roam-directory source-org-roam-directory)
+        (setq-local default-directory source-org-roam-directory)
+        ;; Locally overwrite the file opening function to re-use the
+        ;; last window org-roam was called from
+        ;; (setq-local
+        ;;  org-link-frame-setup
+        ;;  (cons '(file . org-roam--find-file) org-link-frame-setup))
+        ;; (let ((inhibit-read-only t))
+          ;; (erase-buffer)
+          ;; (when (not (eq major-mode 'org-roam-backlinks-mode))
+          ;;   (org-roam-backlinks-mode))
+          (make-local-variable 'org-return-follows-link)
+          (setq org-return-follows-link t)
+          ;; (insert
+          ;;  (propertize buffer-title 'font-lock-face 'org-document-title))
+          (if-let* ((backlinks (org-roam--get-backlinks file-path))
+                    (grouped-backlinks (--group-by (nth 0 it) backlinks)))
+              (progn
+                (insert (format "\n\n* %d Backlinks\n"
+                                (length backlinks)))
+                (dolist (group grouped-backlinks)
+                  (let ((file-from (car group))
+                        (bls (cdr group)))
+                    (insert (format "** [[file:%s][%s]]\n"
+                                    file-from
+                                    (org-roam--get-title-or-slug file-from)))
+                    (dolist (backlink bls)
+                      (pcase-let ((`(,file-from ,file-to ,props) backlink))
+                        (insert (propertize
+                                 (s-trim (s-replace "\n" " "
+                                                    (plist-get props :content)))
+                                 'font-lock-face 'org-block
+                                 'help-echo "mouse-1: visit backlinked note"
+                                 'file-from file-from
+                                 'file-from-point (plist-get props :point)))
+                        (insert "\n\n"))))))
+            (insert "\n\n* No backlinks!"))
+          (save-buffer)
+          (kill-buffer)
+          ;; )
+        ;; (read-only-mode 1))
+      ;; )
+    ))
+
+(defun my/write-org-roam-backlinks ()
+  (interactive)
+  (mapc #'org-roam-write-backlinks-to-file (directory-files-recursively org-roam-directory "\\.org$" nil)))

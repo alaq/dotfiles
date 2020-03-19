@@ -12,3 +12,5 @@
 (package! org-mime)
 (package! smtpmail)
 (package! exwm-randr)
+(package! org-roam
+  :recipe (:host github :repo "jethrokuan/org-roam" :branch "develop"))
