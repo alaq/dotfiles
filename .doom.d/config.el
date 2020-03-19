@@ -428,6 +428,8 @@
 (defun update-backlinks ()
   (interactive)
   (progn
+    (org-roam) ; enable org-roam
+    (org-roam-mode -1) ; disable the auto refresh of the database
     (my/clear-org-roam-backlinks)
     (org-roam-build-cache)
     (my/write-org-roam-backlinks)))
