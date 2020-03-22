@@ -38,14 +38,9 @@
            ((org-agenda-start-with-log-mode '(closed clock state))
             (org-agenda-archives-mode t)))))
   (add-to-list 'org-capture-templates
-               '("td" "Todo" entry
-                 (file+headline "~/org/tasks.org")
-                 "* THEN %?\n %U"
-                 :empty-lines 0))
-  (add-to-list 'org-capture-templates
-               '("wt" "Work item" entry
-                 (file+headline "~/org/tasks.org" "Next")
-                 "* THEN %?\n %U"
+               '("td" "Task" entry
+                 (file "~/org/tasks.org")
+                 "* %?\n %T"
                  :empty-lines 0))
   (add-to-list 'org-capture-templates
                '("j" "Journal" entry
