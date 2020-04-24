@@ -236,6 +236,17 @@
   (+popup/close)
   (message "Sync finished!"))
 
+(defun sync-git-notes ()
+  "Sync notes, via git, with the bash script."
+  (interactive)
+  (require 'core-cli)
+  (compile "sync-git-notes")
+  (while compilation-in-progress
+    (sit-for 1))
+  (other-popup)
+  (+popup/close)
+  (message "Sync finished!"))
+
 (defun org-counsel-goto-and-narrow ()
   "Go to a heading and narrow to it."
   (interactive)
@@ -423,6 +434,36 @@
 (defun update-backlinks ()
   (interactive)
   (progn
+    (defun org-roam--extract-links (&optional file-path)
+      "Extracts all link items within the current buffer.
+Link items are of the form:
+    [file-from file-to properties]
+This is the format that emacsql expects when inserting into the database.
+FILE-FROM is typically the buffer file path, but this may not exist, for example
+in temp buffers.  In cases where this occurs, we do know the file path, and pass
+it as FILE-PATH."
+      (let ((file-path (or file-path
+                           (file-truename (buffer-file-name)))))
+        (org-element-map (org-element-parse-buffer) 'link
+          (lambda (link)
+            (let ((type (org-element-property :type link))
+                  (path (concat org-roam-directory (org-element-property :path link) ".org"))
+                  (start (org-element-property :begin link)))
+              (when (and (string= type "fuzzy")
+                         (org-roam--org-file-p path))
+                (goto-char start)
+                (let* ((element (org-element-at-point))
+                       (begin (or (org-element-property :content-begin element)
+                                  (org-element-property :begin element)))
+                       (content (or (org-element-property :raw-value element)
+                                    (buffer-substring
+                                     begin
+                                     (or (org-element-property :content-end element)
+                                         (org-element-property :end element)))))
+                       (content (string-trim content)))
+                  (vector file-path
+                          (file-truename (expand-file-name path (file-name-directory file-path)))
+                          (list :content content :point begin)))))))))
     (org-roam) ; enable org-roam
     (org-roam-mode -1) ; disable the auto refresh of the database
     (my/clear-org-roam-backlinks)
@@ -432,3 +473,4 @@
 (defun clear-backlinks-in-this-file ()
   (interactive)
   (clear-backlinks-in-file buffer-file-name))
+
