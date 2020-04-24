@@ -489,3 +489,7 @@ it as FILE-PATH."
           (find-file (concat path ".org"))))))
 
 (add-hook 'org-open-at-point-functions 'org-open-fuzzy-links-as-files)
+
+(defun org-count-top-level-headlines-in-current-buffer ()
+  (interactive)
+  (message (format "%s"(length (org-map-entries nil "LEVEL=1" 'file)))))
