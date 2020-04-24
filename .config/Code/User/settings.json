@@ -4,7 +4,7 @@
     "editor.folding": true,
     "editor.hideCursorInOverviewRuler": true,
     "editor.lineHeight": 0,
-    "editor.matchBrackets": true,
+    "editor.matchBrackets": "always",
     "editor.minimap.enabled": false,
     "editor.overviewRulerBorder": false,
     "editor.renderLineHighlight": "line",
@@ -15,7 +15,7 @@
         "editor.lineHighlightBackground": "#1c1f26"
     },
     "explorer.openEditors.visible": 0,
-    "window.zoomLevel": 0,
+    "window.zoomLevel": 1,
     "workbench.activityBar.visible": false,
     "workbench.colorTheme": "Subliminal",
     "workbench.iconTheme": null,
@@ -39,7 +39,6 @@
         80
     ],
     "breadcrumbs.enabled": true,
-
     "zenMode.fullScreen": true,
     "search.showLineNumbers": true,
     "editor.lineNumbers": "relative",
@@ -99,14 +98,18 @@
     ],
     "vim.normalModeKeyBindings": [
         {
-            "before" : ["u"],
-            "commands" : [
+            "before": [
+                "u"
+            ],
+            "commands": [
                 "undo"
             ]
         },
         {
-            "before" : ["<C-r>"],
-            "commands" : [
+            "before": [
+                "<C-r>"
+            ],
+            "commands": [
                 "redo"
             ]
         },
@@ -1203,5 +1206,9 @@
     },
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
-    }
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.formatOnSave": true
 }
