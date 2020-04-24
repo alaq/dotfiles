@@ -3,19 +3,19 @@
 
 NOW=`date`
 
-rclone sync dropbox:org $HOME/.org-staging --exclude="*.ics"
+rclone sync dropbox:org-dropbox $HOME/.org-staging --exclude="*.ics"
 [ ! -d "$HOME/.git-org" ] &&
     [ -f "$HOME/.org-staging/tasks.org" ] &&
     echo "Initializing note folders and repos" &&
-    /usr/bin/git init --bare $HOME/.git-org &&
+    /usr/bin/git init --bare $HOME/.git-org-dropbox &&
     /usr/bin/git --git-dir=$HOME/.git-org/ --work-tree=$HOME/.org-staging add .
 /usr/bin/git --git-dir=$HOME/.git-org/ --work-tree=$HOME/.org-staging commit -am "$NOW"
 [ ! -d "$HOME/org" ] &&
     [ ! -d "$HOME/org/.git" ] &&
-    echo "Creating the ~/org folder" &&
+    echo "Creating the ~/org-dropbox folder" &&
     /usr/bin/git clone $HOME/.git-org/ $HOME/org
-git -C $HOME/org commit -am "$NOW"
-git -C $HOME/org pull --no-edit
-git -C $HOME/org push
+git -C $HOME/org-dropbox commit -am "$NOW"
+git -C $HOME/org-dropbox pull --no-edit
+git -C $HOME/org-dropbox push
 /usr/bin/git --git-dir=$HOME/.git-org/ --work-tree=$HOME/.org-staging checkout -f
-rclone sync $HOME/.org-staging dropbox:org --exclude="*.ics"
+rclone sync $HOME/.org-staging dropbox:org-dropbox --exclude="*.ics"
