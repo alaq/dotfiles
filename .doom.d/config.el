@@ -474,3 +474,18 @@ it as FILE-PATH."
   (interactive)
   (clear-backlinks-in-file buffer-file-name))
 
+(defun org-open-fuzzy-links-as-files ()
+  "Open fuzzy links like [[Example]] as files."
+  (let* ((el (org-element-context))
+         (type (first el))
+         (link-type (plist-get (cadr el) :type))
+         (path (let ((path-1 (plist-get (cadr el) :path)))
+                 (when (stringp path-1)
+                   (org-link-unescape path-1)))))
+    (when (and (eql type 'link)
+               path
+               (string= link-type "fuzzy"))
+      (let* ((path (regexp-quote path)))
+          (find-file (concat path ".org"))))))
+
+(add-hook 'org-open-at-point-functions 'org-open-fuzzy-links-as-files)
