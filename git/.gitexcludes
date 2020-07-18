@@ -1,0 +1,9 @@
+.quicksave.vim
+.tern-port
+.netrwhist
+.clj-kondo
+.lvimrc
+.conjure.edn
+.prepl-port
+docker-compose.local.yml
+.rebl

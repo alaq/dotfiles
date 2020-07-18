@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-# set -e
-
-/usr/bin/git -C $HOME/org add .
-/usr/bin/git -C $HOME/org commit -m "Local edit"
-/usr/bin/git -C $HOME/org pull --no-edit
-/usr/bin/git -C $HOME/org push
