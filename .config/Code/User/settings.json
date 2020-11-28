@@ -9,10 +9,12 @@
     "editor.overviewRulerBorder": false,
     "editor.renderLineHighlight": "line",
     "workbench.colorCustomizations": {
-        "scrollbarSlider.background": "#343d46",
-        "sideBar.border": "#232830",
-        "sideBar.background": "#232830",
-        "editor.lineHighlightBackground": "#1c1f26"
+        "[Subliminal]": {
+            "scrollbarSlider.background": "#343d46",
+            "sideBar.border": "#232830",
+            "sideBar.background": "#232830",
+            "editor.lineHighlightBackground": "#1c1f26"
+        }
     },
     "explorer.openEditors.visible": 0,
     "window.zoomLevel": 1,
