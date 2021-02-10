@@ -1,0 +1,104 @@
+
+{
+    "telemetry.enableTelemetry": false,
+    "extensions.autoUpdate": false,
+    "workbench.colorTheme": "Subliminal",
+    "eslint.validate": ["javascript", "javascriptreact", "typescript"],
+    "zenMode.restore": true,
+    // "editor.fontSize": 13,
+    "editor.folding": true,
+    "editor.hideCursorInOverviewRuler": true,
+    "editor.lineHeight": 0,
+    "editor.matchBrackets": "always",
+    "editor.minimap.enabled": false,
+    "editor.overviewRulerBorder": false,
+    "editor.renderLineHighlight": "line",
+    "workbench.colorCustomizations": {
+        "scrollbarSlider.background": "#343d46",
+        "sideBar.border": "#232830",
+        "sideBar.background": "#232830",
+        "editor.lineHighlightBackground": "#1c1f26"
+    },
+    "explorer.openEditors.visible": 0,
+    "window.zoomLevel": 0,
+    "workbench.activityBar.visible": false,
+    "workbench.iconTheme": null,
+    "workbench.editor.showIcons": false,
+    "workbench.statusBar.visible": true,
+    "vim.useSystemClipboard": true,
+    "vim.overrideCopy": true,
+    "vim.foldfix": true,
+    "zenMode.hideTabs": false,
+    "zenMode.hideStatusBar": false,
+    "workbench.sideBar.location": "left",
+    // "editor.fontFamily": "'Fira Code', 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    "git.confirmSync": false,
+    "zenMode.centerLayout": false,
+    "breadcrumbs.enabled": true,
+    "zenMode.fullScreen": true,
+    "search.showLineNumbers": true,
+    "editor.lineNumbers": "relative",
+    "zenMode.hideLineNumbers": false,
+    "vim.leader": "<space>",
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "terminal.integrated.copyOnSelection": true,
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "prettier.tabWidth": 4,
+    "[markdown]": {
+        "editor.quickSuggestions": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "eslint.trace.server": "verbose",
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<space>"
+            ],
+            "commands": [
+                "vspacecode.space"
+            ]
+        },
+        {
+            "before": [
+                ","
+            ],
+            "commands": [
+                "vspacecode.space",
+                {
+                    "command": "whichkey.triggerKey",
+                    "args": "m"
+                }
+            ]
+        }
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<space>"
+            ],
+            "commands": [
+                "vspacecode.space"
+            ]
+        },
+        {
+            "before": [
+                ","
+            ],
+            "commands": [
+                "vspacecode.space",
+                {
+                    "command": "whichkey.triggerKey",
+                    "args": "m"
+                }
+            ]
+        }
+    ]
+}

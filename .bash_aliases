@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+# Currently not in use
+
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias gs='git status'
 alias gcm='git checkout master'
