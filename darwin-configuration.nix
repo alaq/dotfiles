@@ -65,18 +65,25 @@ in
     ];
 
   # macOS settings, restart needed
-
-  # Disable press-and-hold for keys in favor of key repeat
-  system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;
-  # Set a blazingly fast keyboard repeat rate
-  system.defaults.NSGlobalDomain.InitialKeyRepeat = 10;
-  system.defaults.NSGlobalDomain.KeyRepeat = 1;
-  # Automatically hide and show the Dock
-  system.defaults.dock.autohide = true;
-  # Don’t show recent applications in Dock
-  system.defaults.dock.show-recents = false;
-  # Disable the warning when changing a file extension
-  system.defaults.finder.FXEnableExtensionChangeWarning = false;
+  system.defaults = {
+    NSGlobalDomain = {
+      # Disable press-and-hold for keys in favor of key repeat
+      ApplePressAndHoldEnabled = false;
+      # Set a blazingly fast keyboard repeat rate
+      InitialKeyRepeat = 10;
+      KeyRepeat = 1;
+    };
+    dock = {
+      # Automatically hide and show the Dock
+      autohide = true;
+      # Don’t show recent applications in Dock
+      show-recents = false;
+    };
+    finder = {
+      # Disable the warning when changing a file extension
+      FXEnableExtensionChangeWarning = false;
+    };
+  };
 
 
   # Use a custom configuration.nix location.
