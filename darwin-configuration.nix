@@ -57,12 +57,19 @@ in
 {
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
+  imports = [ <home-manager/nix-darwin> ];
+  users.users.adrien.name = "adrien";
+  users.users.adrien.home = "/Users/adrien";
+  home-manager.users.adrien = (import /Users/adrien/.nixpkgs/home.nix);
   environment.systemPackages =
     [ pkgs.vim
       vscode-with-extensions
-      # pkgs.fira-code
-      pkgs.nodejs_latest
     ];
+
+  fonts = {
+    enableFontDir = true;
+    fonts = with pkgs; [ nerdfonts ]; 
+  };
 
   # macOS settings, restart needed
   system.defaults = {
@@ -72,6 +79,8 @@ in
       # Set a blazingly fast keyboard repeat rate
       InitialKeyRepeat = 10;
       KeyRepeat = 1;
+      "com.apple.mouse.tapBehavior" = 1;
+      # "com.apple.trackpad.scaling" = 1.0;
     };
     dock = {
       # Automatically hide and show the Dock
@@ -91,8 +100,8 @@ in
   # environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
 
   # Auto upgrade nix package and the daemon service.
-  # services.nix-daemon.enable = true;
-  # nix.package = pkgs.nix;
+  services.nix-daemon.enable = true;
+  nix.package = pkgs.nix;
 
   # Create /etc/bashrc that loads the nix-darwin environment.
   programs.zsh.enable = true;  # default shell on catalina
