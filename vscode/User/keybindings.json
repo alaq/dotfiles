@@ -155,5 +155,8 @@
 		"key": "ctrl+l",
 		"command": "file-browser.stepIn",
 		"when": "inFileBrowser"
-	}
+	},
+	// Switching terminals
+	{ "key": "ctrl+shift+k", "command": "workbench.action.terminal.focusNext" },
+	{ "key": "ctrl+shift+j", "command": "workbench.action.terminal.focusPrevious" },
 ]
